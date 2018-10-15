@@ -38,12 +38,15 @@ public class SimpleTest1 {
         Assert.assertEquals(driver.getTitle(), "Home Page");
 
         //6. Assert that there are 4 items on the header section are displayed and they have proper texts
-        Assert.assertTrue(driver.findElement(By.cssSelector(".uui-navigation.nav.navbar-nav.m-l8")).isDisplayed());
-        Assert.assertEquals(driver.findElement(By.cssSelector(".uui-navigation.nav.navbar-nav.m-l8")).getText(),
-                "HOME\n" +
-                        "CONTACT FORM\n" +
-                        "SERVICE\n" +
-                        "METALS & COLORS");
+        WebElement headerSections = driver.findElement(By.cssSelector("ul.uui-navigation.nav.navbar-nav.m-l8"));
+        Assert.assertEquals(driver.findElement(By.cssSelector("ul.uui-navigation.nav.navbar-nav.m-l8")).getText(),
+                    "HOME\nCONTACT FORM\nSERVICE\nMETALS & COLORS");
+        // $$(".uui-navigation.nav.navbar-nav.m-l8 > li > a")
+        //XPath  $x("//"[contains(@class, 'm-18')]
+        Assert.assertEquals(headerSections.findElement(By.cssSelector("li:nth-child(1) > a")).getText(), "HOME");
+        Assert.assertEquals(headerSections.findElement(By.cssSelector("li:nth-child(2) > a")).getText(),"CONTACT FORM");
+        Assert.assertEquals(headerSections.findElement(By.cssSelector("li:nth-child(3) > a")).getText(),"SERVICE");
+//        Assert.assertEquals(headerSections.findElement(By.cssSelector("li:nth-child(4) > a")).getText(),"METALS & COLORS");
 
         //7. Assert that there are 4 images on the Index Page and they are displayed
         List<WebElement> elements = driver.findElements(By.cssSelector(".icons-benefit"));
@@ -51,6 +54,17 @@ public class SimpleTest1 {
         Assert.assertTrue(elements.stream().allMatch(WebElement::isDisplayed));
 
         //8. Assert that there are 4 texts on the Index Page under icons and they have proper text
+        List<WebElement> txtElements = driver.findElements(By.cssSelector(".benefit-txt"));
+        Assert.assertEquals(txtElements.get(0).getText(), "To include good practices\n" +
+                                                              "and ideas from successful\n" +
+                                                              "EPAM project");
+        Assert.assertEquals(txtElements.get(1).getText(), "To be flexible and\ncustomizable");
+        Assert.assertEquals(txtElements.get(2).getText(), "To be multiplatform");
+        Assert.assertEquals(txtElements.get(3).getText(), "Already have good base\n" +
+                                                              "(about 20 internal and\n" +
+                                                              "some external projects),\n" +
+                                                              "wish to get more…");
+
 
         //9. Assert a text of the main header
         WebElement mainHeader = driver.findElement(By.cssSelector("h3.main-title"));
@@ -64,9 +78,7 @@ public class SimpleTest1 {
 
         //10. Assert that there is the iframe in the center of page
         int windowPosition = driver.manage().window().getSize().getHeight();
-        WebElement iframe = driver.findElement(By.cssSelector("iframe")); //Correct
-        System.out.println(windowPosition + " " + iframe.getAttribute("margin") + " " + (windowPosition / 2));
-        System.out.println(iframe.getLocation().getY());
+        WebElement iframe = driver.findElement(By.cssSelector("iframe"));
 
         //11. Switch to the iframe and check that there is Epam logo in the left top conner of iframe
         driver.switchTo().frame("iframe");
@@ -81,14 +93,13 @@ public class SimpleTest1 {
         assertEquals(subHeader.getText(), "JDI GITHUB");
 
         //14. Assert that JDI GITHUB is a link and has a proper URL
-        String innerHtml = subHeader.getAttribute("innerHTML");
-        String pref = "";
-        Matcher matcher = Pattern.compile("http[\\w:/.]+").matcher(innerHtml);
-        if(matcher.find()) {
-            pref = matcher.group();
-        }
-        Assert.assertEquals(pref, "https://github.com/epam/JDI");
+        Assert.assertEquals(subHeader.findElement(By.cssSelector("h3:nth-child(3) > a")).getAttribute("href"), "https://github.com/epam/JDI");
 
+        //15. Assert that there is Left Section
+        Assert.assertTrue(driver.findElement(By.cssSelector(".uui-side-bar")).isDisplayed());
+
+        //16. Assert that there is Footer
+        Assert.assertTrue(driver.findElement(By.cssSelector(".footer-bg")).isDisplayed());
 
         //17. Close Browser
         driver.close();

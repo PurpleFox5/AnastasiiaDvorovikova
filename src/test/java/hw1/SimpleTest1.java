@@ -38,15 +38,11 @@ public class SimpleTest1 {
         Assert.assertEquals(driver.getTitle(), "Home Page");
 
         //6. Assert that there are 4 items on the header section are displayed and they have proper texts
-        WebElement headerSections = driver.findElement(By.cssSelector("ul.uui-navigation.nav.navbar-nav.m-l8"));
-        Assert.assertEquals(driver.findElement(By.cssSelector("ul.uui-navigation.nav.navbar-nav.m-l8")).getText(),
-                    "HOME\nCONTACT FORM\nSERVICE\nMETALS & COLORS");
-        // $$(".uui-navigation.nav.navbar-nav.m-l8 > li > a")
-        //XPath  $x("//"[contains(@class, 'm-18')]
-        Assert.assertEquals(headerSections.findElement(By.cssSelector("li:nth-child(1) > a")).getText(), "HOME");
-        Assert.assertEquals(headerSections.findElement(By.cssSelector("li:nth-child(2) > a")).getText(),"CONTACT FORM");
-        Assert.assertEquals(headerSections.findElement(By.cssSelector("li:nth-child(3) > a")).getText(),"SERVICE");
-//        Assert.assertEquals(headerSections.findElement(By.cssSelector("li:nth-child(4) > a")).getText(),"METALS & COLORS");
+        List<WebElement> headerSections = driver.findElements(By.cssSelector(".m-l8 > li > a"));
+        Assert.assertEquals(headerSections.get(0).getText(), "HOME");
+        Assert.assertEquals(headerSections.get(1).getText(), "CONTACT FORM");
+        Assert.assertEquals(headerSections.get(2).getText(), "SERVICE");
+        Assert.assertEquals(headerSections.get(3).getText(), "METALS & COLORS");
 
         //7. Assert that there are 4 images on the Index Page and they are displayed
         List<WebElement> elements = driver.findElements(By.cssSelector(".icons-benefit"));
@@ -70,15 +66,14 @@ public class SimpleTest1 {
         WebElement mainHeader = driver.findElement(By.cssSelector("h3.main-title"));
         assertEquals(mainHeader.getText(), "EPAM FRAMEWORK WISHES…");
         WebElement mainTxt = driver.findElement(By.cssSelector(".main-txt"));
-        assertEquals(mainTxt.getText().substring(0, 11), "LOREM IPSUM");
         assertEquals(mainTxt.getText(), "LOREM IPSUM DOLOR SIT AMET, CONSECTETUR ADIPISICING ELIT, SED DO EIUSMOD" +
                 " TEMPOR INCIDIDUNT UT LABORE ET DOLORE MAGNA ALIQUA. UT ENIM AD MINIM VENIAM, QUIS NOSTRUD" +
                 " EXERCITATION ULLAMCO LABORIS NISI UT ALIQUIP EX EA COMMODO CONSEQUAT DUIS AUTE IRURE DOLOR IN " +
                 "REPREHENDERIT IN VOLUPTATE VELIT ESSE CILLUM DOLORE EU FUGIAT NULLA PARIATUR.");
 
         //10. Assert that there is the iframe in the center of page
-        int windowPosition = driver.manage().window().getSize().getHeight();
         WebElement iframe = driver.findElement(By.cssSelector("iframe"));
+        Assert.assertTrue(iframe.isDisplayed());
 
         //11. Switch to the iframe and check that there is Epam logo in the left top conner of iframe
         driver.switchTo().frame("iframe");

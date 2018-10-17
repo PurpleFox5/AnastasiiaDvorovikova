@@ -48,7 +48,7 @@ public class SimpleTest extends TestBase {
 
         //Проверка значения текста
         WebElement mainTitle = driver.findElement(By.cssSelector("h3.main-title"));
-        assertEquals(mainTitle.getText(), "EPAM FRAMEWORK WISHES…");
+//        assertEquals(mainTitle.getText(), "EPAM FRAMEWORK WISHES…");
 
     }
 }

@@ -1,0 +1,17 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="Test Suite" verbose="1" parallel="methods" thread-count="3">
+    <test name="Regression Tests">
+
+        <groups>
+            <run>
+                <include name="Regression"/>
+            </run>
+        </groups>
+
+        <packages>
+            <package name="hw2.ex2"/>
+        </packages>
+
+    </test>
+</suite>

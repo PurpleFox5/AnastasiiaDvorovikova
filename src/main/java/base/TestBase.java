@@ -14,7 +14,6 @@ public abstract class TestBase {
     public void beforeSuite(){
         setProperty("webdriver.chrome.driver","src\\main\\resources\\chromedriver.exe");
         time = currentTimeMillis();
-
     }
 
     @AfterSuite

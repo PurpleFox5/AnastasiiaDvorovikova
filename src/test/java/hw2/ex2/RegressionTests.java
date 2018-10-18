@@ -1,38 +1,18 @@
 package hw2.ex2;
 
+import base.TestBaseHW;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.Test;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
-public class RegressionTests {
-
-    static  final int COUNT = 4;
-    static List<String> headerSectionsList = new ArrayList<>();
-    static List<String> texts = new ArrayList<>();
-    static final String MAIN_TEXT = "LOREM IPSUM DOLOR SIT AMET, CONSECTETUR ADIPISICING ELIT, SED DO EIUSMOD" +
-            " TEMPOR INCIDIDUNT UT LABORE ET DOLORE MAGNA ALIQUA. UT ENIM AD MINIM VENIAM, QUIS NOSTRUD" +
-            " EXERCITATION ULLAMCO LABORIS NISI UT ALIQUIP EX EA COMMODO CONSEQUAT DUIS AUTE IRURE DOLOR IN " +
-            "REPREHENDERIT IN VOLUPTATE VELIT ESSE CILLUM DOLORE EU FUGIAT NULLA PARIATUR.";
-
-    {
-        headerSectionsList.add("HOME");
-        headerSectionsList.add("CONTACT FORM");
-        headerSectionsList.add("SERVICE");
-        headerSectionsList.add("METALS & COLORS");
-
-        texts.add("To include good practices\nand ideas from successful\nEPAM project");
-        texts.add("To be flexible and\ncustomizable");
-        texts.add("To be multiplatform");
-        texts.add("Already have good base\n(about 20 internal and\nsome external projects),\nwish to get more…");
-    }
+public class RegressionTests extends TestBaseHW {
 
     @Test(groups = "Regression")
     public void test1InGroupSmoke() {

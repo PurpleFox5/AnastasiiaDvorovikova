@@ -23,7 +23,7 @@ public class checkTextBelowPictures {
         //2. Navigate
         driver.navigate().to("https://epam.github.io/JDI/index.html");
 
-        //3. Assert
+        //3. Assert text below pictures
         List<WebElement> txtElements = driver.findElements(By.cssSelector(".benefit-txt"));
         assertTrue(txtElements.stream().anyMatch(e -> e.getText().contains(text)));
 

@@ -1,5 +1,6 @@
 package hw1;
 
+import base.TestBaseHW;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -9,11 +10,10 @@ import org.testng.asserts.SoftAssert;
 
 import java.util.List;
 
-import static hw1.SimpleTest1.*;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
-public class SimpleTest2 {
+public class SimpleTest2 extends TestBaseHW {
 
     private SoftAssert softAssert = new SoftAssert();
 

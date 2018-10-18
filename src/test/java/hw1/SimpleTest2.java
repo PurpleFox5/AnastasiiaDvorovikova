@@ -18,7 +18,7 @@ public class SimpleTest2 extends TestBaseHW {
     private SoftAssert softAssert = new SoftAssert();
 
     @Test
-    public void IndexPageContentTest() {
+    public void indexPageContentTest() {
         WebDriver driver = new ChromeDriver();
 
         //1. Open test site by URL

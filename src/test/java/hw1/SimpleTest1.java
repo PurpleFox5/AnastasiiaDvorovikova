@@ -15,7 +15,7 @@ import static org.testng.Assert.assertTrue;
 public class SimpleTest1 extends TestBaseHW {
 
     @Test
-    public void simpleTest() {
+    public void IndexPageContentTest() {
         WebDriver driver = new ChromeDriver();
 
         //1. Open test site by URL

@@ -54,91 +54,90 @@ public class HomePage extends TestBaseHW {
     @FindBy(css = ".footer-bg")
     private WebElement footer;
 
-    //WebElement subHeader = driver.findElement(By.xpath("/html/body/div/div[2]/main/div[2]/h3[2]"));
-    @FindBy()
+    @FindBy(xpath = "//a[text()='JDI Github']")
     private WebElement subHeader;
 
     //========================Methods======================
 
-    public void open(WebDriver driver){
+    public void open(WebDriver driver) {
         driver.navigate().to("https://epam.github.io/JDI/");
     }
 
-    public void login(String name, String passwd){
+    public void login(String name, String passwd) {
         profileButton.click();
         login.sendKeys(name);
         password.sendKeys(passwd);
         submit.click();
     }
 
-    public void switchToIframe(WebDriver driver){
+    public void switchToIframe(WebDriver driver) {
         driver.switchTo().frame("iframe");
     }
 
-    public void switchToOriginalWindow(WebDriver driver){
+    public void switchToOriginalWindow(WebDriver driver) {
         driver.switchTo().parentFrame();
     }
 
-    public void close(WebDriver driver){
+    public void close(WebDriver driver) {
         driver.close();
     }
 
     //=======================Asserts=========================
 
-    public void checkProfileName(){
+    public void checkProfileName() {
         assertEquals(profileName.getText(), "PITER CHAILOVSKII");
     }
 
-    public void checkTitle(WebDriver driver){
+    public void checkTitle(WebDriver driver) {
         assertEquals(driver.getTitle(), "Home Page");
     }
 
-    public void checkHeaderSections(){
+    public void checkHeaderSections() {
         assertEquals(headerSections.size(), COUNT);
         for (WebElement element : headerSections) {
             assertTrue(headerSectionsList.contains(element.getText()));
         }
     }
 
-    public void checkImages(){
+    public void checkImages() {
         assertEquals(images.size(), COUNT);
         assertTrue(images.stream().allMatch(WebElement::isDisplayed));
     }
 
-    public void checkTextUnderPictures(){
+    public void checkTextUnderPictures() {
         assertEquals(txtElements.size(), COUNT);
         for (WebElement element : txtElements) {
             assertTrue(texts.contains(element.getText()));
         }
     }
 
-    public void checkMainHeader(){
+    public void checkMainHeader() {
         assertEquals(mainHeader.getText(), "EPAM FRAMEWORK WISHES…");
         assertEquals(mainTxt.getText(), MAIN_TEXT);
     }
 
-    public void checkIframe(){
+    public void checkIframe() {
         assertTrue(iframe.isDisplayed());
     }
 
-    public void checkLogo(){
+    public void checkLogo() {
         assertTrue(logo.isDisplayed());
     }
 
-    public void checkLeftSection(){
+    public void checkLeftSection() {
         assertTrue(leftSection.isDisplayed());
     }
 
-    public void checkFooter(){
+    public void checkFooter() {
         assertTrue(footer.isDisplayed());
     }
 
-    public void checkSubHeader(){
+    public void checkSubHeader() {
         assertEquals(subHeader.getText(), "JDI GITHUB");
     }
 
-    public void checkSubHeaderLink(){
-//        assertEquals(subHeader.findElement(By.cssSelector("h3:nth-child(3) > a")).getAttribute("href"), "https://github.com/epam/JDI");
+    public void checkSubHeaderLink() {
+        assertEquals(subHeader.getAttribute("href"), "https://github.com/epam/JDI");
     }
 
 

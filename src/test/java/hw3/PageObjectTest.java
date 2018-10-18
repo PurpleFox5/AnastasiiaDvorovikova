@@ -1,19 +1,11 @@
 package hw3;
 
-import base.TestBaseHW;
-import org.openqa.selenium.By;
+import hw3.pageObjects.HomePage;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import hw3.pageObjects.HomePage;
-
-import java.util.List;
-
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertTrue;
 
 public class PageObjectTest {
 

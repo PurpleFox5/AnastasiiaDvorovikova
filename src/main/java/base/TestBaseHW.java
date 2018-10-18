@@ -1,7 +1,5 @@
 package base;
 
-import org.testng.annotations.BeforeSuite;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,7 +15,6 @@ public abstract class TestBaseHW {
     protected List<String> texts = new ArrayList<>();
 
     {
-
         headerSectionsList.add("HOME");
         headerSectionsList.add("CONTACT FORM");
         headerSectionsList.add("SERVICE");

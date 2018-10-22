@@ -1,4 +1,4 @@
-package hw3.pageObjects;
+package pageObjects;
 
 import base.TestBaseHW;
 import org.openqa.selenium.WebDriver;
@@ -10,7 +10,7 @@ import java.util.List;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
-public class HomePage extends TestBaseHW {
+public class HomePageHomeWork3 extends TestBaseHW {
 
     @FindBy(css = ".profile-photo")
     private WebElement profileButton;

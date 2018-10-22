@@ -1,6 +1,6 @@
 package hw3;
 
-import hw3.pageObjects.HomePage;
+import pageObjects.HomePageHomeWork3;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.PageFactory;
@@ -10,12 +10,12 @@ import org.testng.annotations.Test;
 public class PageObjectTest {
 
     private WebDriver driver;
-    private HomePage homePage;
+    private HomePageHomeWork3 homePage;
 
     @BeforeClass
     public void beforeClass(){
         driver = new ChromeDriver();
-        homePage = PageFactory.initElements(driver,HomePage.class);
+        homePage = PageFactory.initElements(driver,HomePageHomeWork3.class);
     }
 
     @Test

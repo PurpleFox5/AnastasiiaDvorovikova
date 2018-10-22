@@ -23,7 +23,7 @@ public abstract class TestBaseHW {
         texts.add("To include good practices\nand ideas from successful\nEPAM project");
         texts.add("To be flexible and\ncustomizable");
         texts.add("To be multiplatform");
-        texts.add("Already have good base\n(about 20 internal and\nsome external projects),\nwish to get moreâ€¦");
+        texts.add("Already have good base\n(about 20 internal and\nsome external projects),\nwish to get more…");
 
     }
 }

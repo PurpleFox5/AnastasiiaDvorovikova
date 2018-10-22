@@ -51,13 +51,13 @@ public class RegressionTests extends TestBaseHW {
         //8. Assert that there are 4 texts on the Index Page under icons and they have proper text
         List<WebElement> txtElements = driver.findElements(By.cssSelector(".benefit-txt"));
         assertEquals(txtElements.size(), COUNT);
-//        for (WebElement element : txtElements) {
-//            assertTrue(texts.contains(element.getText()));
-//        }
+        for (WebElement element : txtElements) {
+            assertTrue(texts.contains(element.getText()));
+        }
 
         //9. Assert a text of the main header
         WebElement mainHeader = driver.findElement(By.cssSelector("h3.main-title"));
-        //assertEquals(mainHeader.getText(), "EPAM FRAMEWORK WISHESâ€¦");
+        assertEquals(mainHeader.getText(), "EPAM FRAMEWORK WISHES…");
         WebElement mainTxt = driver.findElement(By.cssSelector(".main-txt"));
         assertEquals(mainTxt.getText(), MAIN_TEXT);
 
@@ -127,13 +127,13 @@ public class RegressionTests extends TestBaseHW {
         //8. Assert that there are 4 texts on the Index Page under icons and they have proper text
         List<WebElement> txtElements = driver.findElements(By.cssSelector(".benefit-txt"));
         assertEquals(txtElements.size(), COUNT);
-//        for (WebElement element : txtElements) {
-//            assertTrue(texts.contains(element.getText()));
-//        }
+        for (WebElement element : txtElements) {
+            assertTrue(texts.contains(element.getText()));
+        }
 
         //9. Assert a text of the main header
         WebElement mainHeader = driver.findElement(By.cssSelector("h3.main-title"));
-        //assertEquals(mainHeader.getText(), "EPAM FRAMEWORK WISHESâ€¦");
+        assertEquals(mainHeader.getText(), "EPAM FRAMEWORK WISHES…");
         WebElement mainTxt = driver.findElement(By.cssSelector(".main-txt"));
         assertEquals(mainTxt.getText(), MAIN_TEXT);
 
@@ -203,13 +203,13 @@ public class RegressionTests extends TestBaseHW {
         //8. Assert that there are 4 texts on the Index Page under icons and they have proper text
         List<WebElement> txtElements = driver.findElements(By.cssSelector(".benefit-txt"));
         assertEquals(txtElements.size(), COUNT);
-//        for (WebElement element : txtElements) {
-//            assertTrue(texts.contains(element.getText()));
-//        }
+        for (WebElement element : txtElements) {
+            assertTrue(texts.contains(element.getText()));
+        }
 
         //9. Assert a text of the main header
         WebElement mainHeader = driver.findElement(By.cssSelector("h3.main-title"));
-        //assertEquals(mainHeader.getText(), "EPAM FRAMEWORK WISHESâ€¦");
+        assertEquals(mainHeader.getText(), "EPAM FRAMEWORK WISHES…");
         WebElement mainTxt = driver.findElement(By.cssSelector(".main-txt"));
         assertEquals(mainTxt.getText(), MAIN_TEXT);
 

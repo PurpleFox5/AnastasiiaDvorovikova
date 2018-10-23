@@ -9,16 +9,16 @@ import org.testng.annotations.Test;
 
 import java.util.List;
 
-import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
-public class checkTextBelowPictures {
+public class CheckTextBelowPictures {
 
     @Test(dataProvider = "textBelowPicturesDataProviders", dataProviderClass = DataProviderTextBelowPictures.class)
-    public void checkText(String text){
+    public void checkText(String text) {
 
         //1. Open BR
         WebDriver driver = new ChromeDriver();
+        driver.manage().window().maximize();
 
         //2. Navigate
         driver.navigate().to("https://epam.github.io/JDI/index.html");

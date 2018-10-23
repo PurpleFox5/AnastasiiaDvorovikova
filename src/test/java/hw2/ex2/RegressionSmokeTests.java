@@ -51,7 +51,7 @@ public class RegressionSmokeTests extends TestBaseHW {
         //8. Assert that there are 4 texts on the Index Page under icons and they have proper text
         List<WebElement> txtElements = driver.findElements(By.cssSelector(".benefit-txt"));
         assertEquals(txtElements.size(), COUNT);
-        for (int i = 0; i < COUNT; i++){
+        for (int i = 0; i < COUNT; i++) {
             assertEquals(txtElements.get(i).getText(), (texts.get(i)));
         }
 

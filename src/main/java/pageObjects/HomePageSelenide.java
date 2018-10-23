@@ -1,7 +1,6 @@
 package pageObjects;
 
 import com.codeborne.selenide.SelenideElement;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 import static com.codeborne.selenide.Selenide.open;
@@ -20,7 +19,7 @@ public class HomePageSelenide {
     @FindBy(css = ".login [type = 'submit']")
     private SelenideElement submit;
 
-    public void login(String name, String passwd){
+    public void login(String name, String passwd) {
         profileButton.click();
         login.sendKeys(name);
         password.sendKeys(passwd);

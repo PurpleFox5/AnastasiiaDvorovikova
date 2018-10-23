@@ -2,15 +2,16 @@ package enums;
 
 public enum Users {
 
-    PITER_SHALOVSKII("epam","1234");
+    PITER_SHAILOVSKII("PITER CHAILOVSKII", "epam","1234");
 
-    String login;
-    String pasword;
+    public String name;
+    public String login;
+    public String password;
 
-    Users(String login, String pasword){
-
+    Users(String name, String login, String password){
+        this.name = name;
         this.login = login;
-        this.pasword = pasword;
-
+        this.password = password;
     }
+
 }

@@ -16,7 +16,7 @@ public class HomePage {
     @FindBy(css = ".login [type = 'submit']")
     private WebElement submit;
 
-    public void login(String name, String passwd){
+    public void login(String name, String passwd) {
         profileButton.click();
         login.sendKeys(name);
         password.sendKeys(passwd);

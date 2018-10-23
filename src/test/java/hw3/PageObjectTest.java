@@ -13,9 +13,9 @@ public class PageObjectTest {
     private HomePageHomeWork3 homePage;
 
     @BeforeClass
-    public void beforeClass(){
+    public void beforeClass() {
         driver = new ChromeDriver();
-        homePage = PageFactory.initElements(driver,HomePageHomeWork3.class);
+        homePage = PageFactory.initElements(driver, HomePageHomeWork3.class);
     }
 
     @Test

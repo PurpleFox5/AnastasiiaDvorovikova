@@ -32,18 +32,18 @@ public class SimpleTestSelenidePageObject extends SelenideTestBase {
         homePageSelenide.openPage();
 
         //3. Assert
-//        assertEquals(getWebDriver().getTitle(), "Home Page");
+        assertEquals(getWebDriver().getTitle(), "Home Page");
 
         //4.Login
         homePageSelenide.login("epam", "1234");
 
         //5. Проверка значения текста
-//        SelenideElement mainTitle = $("h3.main-title");
-//        mainTitle.shouldHave(text("EPAM FRAMEWORK WISHES…"));
-//
-//        //Check 4
-//        $$(By.xpath("")).shouldHaveSize(4);
-//        $$(By.xpath("")).shouldBe(CollectionCondition.sizeLessThan(5));
+        SelenideElement mainTitle = $("h3.main-title");
+        mainTitle.shouldHave(text("EPAM FRAMEWORK WISHES…"));
+
+        //Check 4
+        $$(By.xpath("")).shouldHaveSize(4);
+        $$(By.xpath("")).shouldBe(CollectionCondition.sizeLessThan(5));
 
 
 

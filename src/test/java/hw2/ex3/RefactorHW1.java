@@ -7,9 +7,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.*;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import static java.lang.System.setProperty;
 import static org.testng.Assert.assertEquals;
@@ -20,7 +18,7 @@ public class RefactorHW1 extends TestBaseHW {
     private WebDriver driver;
 
     @BeforeMethod(alwaysRun = true)
-        public void beforeMethod() {
+    public void beforeMethod() {
         driver.manage().window().maximize();
     }
 

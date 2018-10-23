@@ -12,16 +12,13 @@ public abstract class DataPageTestBase {
     }
 
 
-    public int getSliderPosition(SelenideElement sliderTrack, SelenideElement slider, int position) {
-        int xOffset = 0;
-        if (position >= 0 && position <= 100) {
-            int step = sliderTrack.getSize().width / 4;
-            int sliderCenterPx = (int) (Integer.parseInt(slider.getCssValue("left")
-                    .replaceAll("px", "")) + slider.getSize().width / 2);
-            int currectPosition = sliderCenterPx / step + 1;
-            xOffset = (int)((position - currectPosition) * step);
+    public int getSliderPosition(int width, SelenideElement slider, int position) {
 
+        int current = Integer.parseInt(slider.getText());
+        if (position < current){
+            position -= 1;
         }
+        int xOffset = width * (position - current) / 100;
         return xOffset;
     }
 

@@ -14,12 +14,12 @@ public class ServicePageInterfaceTest extends ServicePageTestBase {
     private ServicePage servicePage;
 
     @BeforeClass
-    public void beforeClass(){
+    public void beforeClass() {
         servicePage = page(ServicePage.class);
     }
 
     @Test
-    public void servicePageTest(){
+    public void servicePageTest() {
         //1. Open test site by URL
         servicePage.openPage();
 

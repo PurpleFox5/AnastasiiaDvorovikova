@@ -7,12 +7,9 @@ import enums.Users;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 
-import java.util.List;
-
-import static com.codeborne.selenide.Selenide.$$;
 import static com.codeborne.selenide.Selenide.open;
 import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
-import static enums.LogsLines.SLIDER;
+import static enums.LogsLines.*;
 import static enums.Users.PITER_SHAILOVSKII;
 import static org.testng.Assert.assertEquals;
 
@@ -71,13 +68,18 @@ public class DataPage extends DataPageTestBase {
         datePage.click();
     }
 
-    public void moveSliders(int left, int right) {
+    public void moveRightSliders(int index) {
         int width = sliderTrack.getSize().width;
         Actions move = new Actions(getWebDriver());
-        int xOffsetLeft = getSliderPosition(width, leftSlider, left);
-        int xOffset1Right = getSliderPosition(width, rightSlider, right);
-        move.dragAndDropBy(leftSlider, xOffsetLeft, 0).build().perform();
+        int xOffset1Right = getSliderPosition(width, rightSlider, index);
         move.dragAndDropBy(rightSlider, xOffset1Right, 0).build().perform();
+    }
+
+    public void moveLeftSlider(int index) {
+        int width = sliderTrack.getSize().width;
+        Actions move = new Actions(getWebDriver());
+        int xOffsetLeft = getSliderPosition(width, leftSlider, index);
+        move.dragAndDropBy(leftSlider, xOffsetLeft, 0).build().perform();
     }
 
     //===============Check===========================
@@ -90,8 +92,8 @@ public class DataPage extends DataPageTestBase {
         userName.shouldHave(Condition.text(PITER_SHAILOVSKII.name));
     }
 
-    public void checkLogs(int index) {
-        logs.should(Condition.text(index + SLIDER.line));
+    public void checkLogs(int from, int to) {
+        logs.should(Condition.text(RANGE2_FROM.line + from + SLIDER.line));
+        logs.should(Condition.text(RANGE2_TO.line + to + SLIDER.line));
     }
-
 }

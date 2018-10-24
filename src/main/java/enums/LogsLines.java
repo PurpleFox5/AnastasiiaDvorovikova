@@ -7,8 +7,9 @@ public enum LogsLines {
     WATER_FALSE("Water: condition changed to false"),
     SELEN("value changed to Selen"),
     YELLOW("value changed to Yellow"),
+    RANGE2_FROM("Range 2(From):"),
+    RANGE2_TO("Range 2(To):"),
     SLIDER(" link clicked");
-
 
     public String line;
 

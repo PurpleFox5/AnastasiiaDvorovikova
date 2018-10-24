@@ -11,14 +11,9 @@ public abstract class DataPageTestBase {
         Configuration.browser = "chrome";
     }
 
-
     public int getSliderPosition(int width, SelenideElement slider, int position) {
-
         int current = Integer.parseInt(slider.getText());
-        if (position < current){
-            position -= 1;
-        }
-        int xOffset = width * (position - current) / 100;
+        int xOffset = (int) (width / 100.0 * (position - current) - 1);
         return xOffset;
     }
 

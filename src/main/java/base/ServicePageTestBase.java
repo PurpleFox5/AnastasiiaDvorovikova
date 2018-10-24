@@ -9,6 +9,7 @@ import java.util.List;
 public abstract class ServicePageTestBase {
 
     protected List<String> menuServiceList = new ArrayList<>();
+
     {
         menuServiceList.add("Support");
         menuServiceList.add("Dates");

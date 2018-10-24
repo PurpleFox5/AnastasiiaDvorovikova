@@ -4,7 +4,7 @@
     <test name="Simple Test">
 
         <classes>
-            <class name="hw5.ex1.ServicePageInterfaceAllureTest"/>
+            <class name="hw5.ex2.ServicePageInterfaceAllureTest"/>
         </classes>
 
     </test>

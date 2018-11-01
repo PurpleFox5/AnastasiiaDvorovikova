@@ -5,6 +5,8 @@
 
         <classes>
             <class name="hw5.ex2.DifferentElementsPageAllureTest"/>
+            <class name="hw4.DataPageTest"/>
+            <class name="hw4.DifferentElementsPageInterfaceTest"/>
         </classes>
 
     </test>

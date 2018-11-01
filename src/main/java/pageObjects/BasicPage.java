@@ -9,7 +9,7 @@ import static org.testng.Assert.assertEquals;
 
 public class BasicPage {
 
-    @Then("The title is Home Page")
+    @Then("The title is (.+)$")
     @Step
     public void checkTitle(Titles title) {
         assertEquals(getWebDriver().getTitle(), title.name);

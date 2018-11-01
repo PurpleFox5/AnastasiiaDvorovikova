@@ -13,5 +13,18 @@ Feature: Different Elements tests
     When I open through the header menu Service -> Different Elements Page
     Then The title is Different Elements
 
+    Then There are 4 checkboxes
+    Then There are 4 radioButtons
+    Then There is 1 dropdown
+    Then There are 2 buttons
+
+    Then There is Right Section
+    Then There is Left Section
+
+    When Select checkboxes
+
+
+
+
 
 

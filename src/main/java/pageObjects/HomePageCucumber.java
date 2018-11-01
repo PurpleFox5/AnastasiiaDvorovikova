@@ -89,7 +89,7 @@ public class HomePageCucumber {
     }
 
     @Step
-//    @When()
+    @When("I open through the header menu Service -> Different Elements Page")
     public void openPageDifferentElements() {
         servicePage.click();
     }

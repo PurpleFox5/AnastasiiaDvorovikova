@@ -101,6 +101,5 @@ public class DifferentElementsPageAllureTest extends PageTestBase {
         // and value is corresponded to the status of checkbox. 
         differentElements.checkLogs(WATER.toString() + CHECHBOX_FALSE,
                 WIND.toString() + CHECHBOX_FALSE);
-
     }
 }

@@ -27,7 +27,7 @@ public class DataPage extends BasicPage {
 
     //===============Methods==========================
 
-    @Step
+    @Step("Move slider in position {0},{1}")
     public void moveSliders(int left, int right) {
         int width = sliderTrack.getSize().width;
         Actions moveLeft = new Actions(getWebDriver());
@@ -50,7 +50,7 @@ public class DataPage extends BasicPage {
 
     //===============Check===========================
 
-    @Step
+    @Step("Check slider`s position, it should be {0},{1}")
     public void checkLogs(int from, int to) {
         List<SelenideElement> logsList = logs.$$("li");
 

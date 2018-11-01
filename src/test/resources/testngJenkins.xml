@@ -4,8 +4,7 @@
     <test name="Simple Test">
 
         <classes>
-            <class name="hw4.DataPageTest"/>
-            <class name="hw4.DifferentElementsPageInterfaceTest"/>
+            <class name="hw5.ex2.DifferentElementsPageAllureTest"/>
         </classes>
 
     </test>

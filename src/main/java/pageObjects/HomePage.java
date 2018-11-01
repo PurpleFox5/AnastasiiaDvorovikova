@@ -3,6 +3,7 @@ package pageObjects;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import enums.Users;
+import io.qameta.allure.Step;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -48,6 +49,7 @@ public class HomePage extends BasicPage {
 
     //=====================Methods==================
 
+    @Step
     public void login(Users user) {
         profileButton.click();
         login.sendKeys(user.login);
@@ -55,37 +57,45 @@ public class HomePage extends BasicPage {
         submit.click();
     }
 
+    @Step
     public void openPage() {
         open("https://epam.github.io/JDI/index.html");
     }
 
+    @Step
     public void clickHeaderService() {
         headerService.click();
     }
 
+    @Step
     public void clickLeftMenuService() {
         leftService.click();
     }
 
+    @Step
     public void openPageDifferentElements() {
         servicePage.click();
     }
 
+    @Step
     public void openDataPage() {
         datePage.click();
     }
 
     //====================Checks================
 
+    @Step("Check user name {0}")
     public void checkUserName(Users user) {
         userName.shouldHave(text(user.name));
     }
 
+    @Step
     public void checkHeaderMenuService() {
         menuServiceHeader.shouldHaveSize(values().length);
         menuServiceHeader.shouldHave(exactTexts(getNames()));
     }
 
+    @Step
     public void checkLeftMenuService() {
         menuService.shouldHaveSize(values().length);
         menuService.shouldHave(exactTexts(getNames()));

@@ -1,66 +1,76 @@
 package hw4;
 
-import base.DataPageTestBase;
-import enums.Users;
+import base.PageTestBase;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Story;
+import listeners.AllureListener;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import pageObjects.DataPage;
+import pageObjects.HomePage;
 
 import static com.codeborne.selenide.Selenide.page;
+import static enums.Titles.DATA_PAGE;
+import static enums.Titles.HOME_PAGE;
+import static enums.Users.PITER_SHAILOVSKII;
 
-public class DataPageTest extends DataPageTestBase {
+@Feature("HomeWork5 tests")
+@Story("Data Page Testing")
+@Listeners(AllureListener.class)
+public class DataPageTest extends PageTestBase {
 
     private DataPage dataPage;
+    private HomePage homePage;
 
     @BeforeClass
     public void beforeClass() {
         dataPage = page(DataPage.class);
+        homePage = page(HomePage.class);
     }
 
     @Test
     public void dataPageSliderCheck() {
         //1. Open test site by URL
-        dataPage.openPage();
+        homePage.openPage();
 
         //2. Assert Browser title
-        dataPage.checkTitle();
+        homePage.checkTitle(HOME_PAGE);
 
         //3. Perform login
-        dataPage.login(Users.PITER_SHAILOVSKII);
+        homePage.login(PITER_SHAILOVSKII);
 
         //4. Assert User name in the left-top side of screen that user is loggined
-        dataPage.checkUserName();
+        homePage.checkUserName(PITER_SHAILOVSKII);
 
         //5. Open through the header menu Service -> Dates Page
-        dataPage.openPageDifferentElements();
+        homePage.clickHeaderService();
+        homePage.openDataPage();
+        dataPage.checkTitle(DATA_PAGE);
 
         //6. Using drag-and-drop set Range sliders. left sliders - the most left position,
         // right slider - the most right position
-        dataPage.moveLeftSlider(0);
-        dataPage.moveRightSliders(100);
+        dataPage.moveSliders(0, 100);
 
         //7. Assert that for "From" and "To" sliders there are logs rows with corresponding values
         dataPage.checkLogs(0, 100);
 
         //8. Using drag-and-drop set Range sliders. left sliders - the most left position,
         // right slider - the most left position.
-        dataPage.moveLeftSlider(100);
-        dataPage.moveRightSliders(100);
+        dataPage.moveSliders(100, 100);
 
         //9. Assert that for "From" and "To" sliders there are logs rows with corresponding values
         dataPage.checkLogs(100, 100);
 
         //10.Using drag-and-drop set Range sliders. left sliders - the most rigth position,
         // right slider - the most rigth position.
-        dataPage.moveLeftSlider(0);
-        dataPage.moveRightSliders(0);
+        dataPage.moveSliders(0, 0);
 
         //11. Assert that for "From" and "To" sliders there are logs rows with corresponding values
-        dataPage.checkLogs(0, 0);
+//        dataPage.checkLogs(0, 0);
 
         //12. Using drag-and-drop set Range sliders.
-        dataPage.moveRightSliders(70);
-        dataPage.moveLeftSlider(30);
+        dataPage.moveSliders(30, 70);
 
         //13. Assert that for "From" and "To" sliders there are logs rows with corresponding values
         dataPage.checkLogs(30, 70);

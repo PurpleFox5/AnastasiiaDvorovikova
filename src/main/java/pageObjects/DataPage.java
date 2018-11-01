@@ -1,42 +1,17 @@
 package pageObjects;
 
-import base.DataPageTestBase;
-import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
-import enums.Users;
+import io.qameta.allure.Step;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 
-import static com.codeborne.selenide.Selenide.open;
+import java.util.List;
+
+import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
 import static enums.LogsLines.*;
-import static enums.Users.PITER_SHAILOVSKII;
-import static org.testng.Assert.assertEquals;
 
-public class DataPage extends DataPageTestBase {
-    @FindBy(css = "h3.main-title")
-    private SelenideElement mainTitle;
-
-    @FindBy(css = ".profile-photo")
-    private SelenideElement profileButton;
-
-    @FindBy(css = "[id = 'Name']")
-    private SelenideElement login;
-
-    @FindBy(css = "[id = 'Password']")
-    private SelenideElement password;
-
-    @FindBy(css = ".login [type = 'submit']")
-    private SelenideElement submit;
-
-    @FindBy(css = ".profile-photo")
-    private SelenideElement userName;
-
-    @FindBy(xpath = "//li[@class='dropdown']")
-    private SelenideElement headerService;
-
-    @FindBy(xpath = "//ul[@class='dropdown-menu']/child::li[contains(.,'Dates')]")
-    private SelenideElement datePage;
+public class DataPage extends BasicPage {
 
     @FindBy(className = "ui-slider")
     private SelenideElement sliderTrack;
@@ -52,48 +27,39 @@ public class DataPage extends DataPageTestBase {
 
     //===============Methods==========================
 
-    public void openPage() {
-        open("https://epam.github.io/JDI/");
-    }
-
-    public void login(Users user) {
-        profileButton.click();
-        login.sendKeys(user.login);
-        password.sendKeys(user.password);
-        submit.click();
-    }
-
-    public void openPageDifferentElements() {
-        headerService.click();
-        datePage.click();
-    }
-
-    public void moveRightSliders(int index) {
+    @Step
+    public void moveSliders(int left, int right) {
         int width = sliderTrack.getSize().width;
-        Actions move = new Actions(getWebDriver());
-        int xOffset1Right = getSliderPosition(width, rightSlider, index);
-        move.dragAndDropBy(rightSlider, xOffset1Right, 0).build().perform();
-    }
+        Actions moveLeft = new Actions(getWebDriver());
+        Actions moveRight = new Actions(getWebDriver());
 
-    public void moveLeftSlider(int index) {
-        int width = sliderTrack.getSize().width;
-        Actions move = new Actions(getWebDriver());
-        int xOffsetLeft = getSliderPosition(width, leftSlider, index);
-        move.dragAndDropBy(leftSlider, xOffsetLeft, 0).build().perform();
+        int currentRight = Integer.parseInt(rightSlider.getText());
+        int currentLeft = Integer.parseInt(leftSlider.getText());
+
+        int xOffset1Right = (int) (width / 100.0 * (right - currentRight) - 1);
+        int xOffsetLeft = (int) (width / 100.0 * (left - currentLeft) - 1);
+
+        if (left >= currentRight) {
+            moveRight.dragAndDropBy(rightSlider, xOffset1Right, 0).build().perform();
+            moveLeft.dragAndDropBy(leftSlider, xOffsetLeft, 0).build().perform();
+        } else {
+            moveLeft.dragAndDropBy(leftSlider, xOffsetLeft, 0).build().perform();
+            moveRight.dragAndDropBy(rightSlider, xOffset1Right, 0).build().perform();
+        }
     }
 
     //===============Check===========================
 
-    public void checkTitle() {
-        assertEquals(getWebDriver().getTitle(), "Home Page");
-    }
-
-    public void checkUserName() {
-        userName.shouldHave(Condition.text(PITER_SHAILOVSKII.name));
-    }
-
+    @Step
     public void checkLogs(int from, int to) {
-        logs.should(Condition.text(RANGE2_FROM.line + from + SLIDER.line));
-        logs.should(Condition.text(RANGE2_TO.line + to + SLIDER.line));
+        List<SelenideElement> logsList = logs.$$("li");
+
+        if (logsList.get(0).getText().contains(RANGE2_TO.toString())) {
+            logsList.get(1).should(text(RANGE2_FROM.toString() + from + SLIDER));
+            logsList.get(0).should(text(RANGE2_TO.toString() + to + SLIDER));
+        } else {
+            logsList.get(0).should(text(RANGE2_FROM.toString() + from + SLIDER));
+            logsList.get(1).should(text(RANGE2_TO.toString() + to + SLIDER));
+        }
     }
 }

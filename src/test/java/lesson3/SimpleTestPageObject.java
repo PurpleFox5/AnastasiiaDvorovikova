@@ -1,6 +1,7 @@
 package lesson3;
 
 import base.TestBase;
+import enums.Users;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -47,7 +48,7 @@ public class SimpleTestPageObject extends TestBase {
         assertEquals(driver.getTitle(), "Home Page");
 
         //4.Login
-        homePage.login("epam", "1234");
+        homePage.login(Users.PITER_SHAILOVSKII);
 
         WebElement mainTitle = driver.findElement(By.cssSelector("h3.main-title"));
 //        assertEquals(mainTitle.getText(), "EPAM FRAMEWORK WISHES…");

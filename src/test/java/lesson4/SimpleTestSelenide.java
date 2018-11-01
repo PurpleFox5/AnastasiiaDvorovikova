@@ -1,21 +1,18 @@
 package lesson4;
 
-import base.SelenideTestBase;
+import base.PageTestBase;
 import com.codeborne.selenide.CollectionCondition;
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 
 import static com.codeborne.selenide.Condition.text;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.$$;
-import static com.codeborne.selenide.Selenide.open;
+import static com.codeborne.selenide.Selenide.*;
 import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
 import static java.lang.System.setProperty;
 import static org.testng.Assert.assertEquals;
 
-public class SimpleTestSelenide extends SelenideTestBase {
+public class SimpleTestSelenide extends PageTestBase {
     @Test
     public void simpleTest() {
         setProperty("webdriver.chrome.driver", "src\\main\\resources\\chromedriver.exe");
@@ -39,7 +36,6 @@ public class SimpleTestSelenide extends SelenideTestBase {
         //Check 4
         $$(By.xpath("")).shouldHaveSize(4);
         $$(By.xpath("")).shouldBe(CollectionCondition.sizeLessThan(5));
-
 
 
     }

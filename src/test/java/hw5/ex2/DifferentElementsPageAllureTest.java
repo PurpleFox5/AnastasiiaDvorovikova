@@ -14,7 +14,6 @@ import static com.codeborne.selenide.Selenide.page;
 import static enums.CheckBoxes.*;
 import static enums.LogsLines.*;
 import static enums.RadioButtons.SELEN;
-import static enums.Titles.DIFFERENT_ELEMENTS;
 import static enums.Titles.HOME_PAGE;
 import static enums.Users.PITER_SHAILOVSKII;
 
@@ -38,7 +37,7 @@ public class DifferentElementsPageAllureTest extends PageTestBase {
         homePage.openPage();
 
         //2. Assert Browser title
-        homePage.checkTitle(DIFFERENT_ELEMENTS);
+        homePage.checkTitle(HOME_PAGE);
 
         //3. Perform login
         homePage.login(PITER_SHAILOVSKII);

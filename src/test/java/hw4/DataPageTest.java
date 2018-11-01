@@ -57,17 +57,17 @@ public class DataPageTest extends PageTestBase {
 
         //8. Using drag-and-drop set Range sliders. left sliders - the most left position,
         // right slider - the most left position.
-        dataPage.moveSliders(100, 100);
+        dataPage.moveSliders(0, 0);
 
         //9. Assert that for "From" and "To" sliders there are logs rows with corresponding values
-        dataPage.checkLogs(100, 100);
+        dataPage.checkLogs(0, 0);
 
         //10.Using drag-and-drop set Range sliders. left sliders - the most rigth position,
         // right slider - the most rigth position.
-        dataPage.moveSliders(0, 0);
+        dataPage.moveSliders(100, 100);
 
         //11. Assert that for "From" and "To" sliders there are logs rows with corresponding values
-//        dataPage.checkLogs(0, 0);
+        dataPage.checkLogs(100, 100);
 
         //12. Using drag-and-drop set Range sliders.
         dataPage.moveSliders(30, 70);

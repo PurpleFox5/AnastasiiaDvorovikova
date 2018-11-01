@@ -13,9 +13,9 @@ import pageObjects.HomePage;
 import static com.codeborne.selenide.Selenide.page;
 import static enums.CheckBoxes.*;
 import static enums.LogsLines.*;
-import static enums.RadioButtons.BRONZE;
 import static enums.RadioButtons.SELEN;
 import static enums.Titles.DIFFERENT_ELEMENTS;
+import static enums.Titles.HOME_PAGE;
 import static enums.Users.PITER_SHAILOVSKII;
 
 @Feature("HomeWork5 tests")
@@ -57,7 +57,7 @@ public class DifferentElementsPageAllureTest extends PageTestBase {
         //7. Open through the header menu Service -> Different Elements Page
         homePage.clickHeaderService();
         homePage.openPageDifferentElements();
-        differentElements.checkTitle(DIFFERENT_ELEMENTS);
+        differentElements.checkTitle(HOME_PAGE);
 
         //8. Check interface on Different elements page, it contains all needed elements
         differentElements.checkVisibleCheckBoxes();
@@ -85,7 +85,7 @@ public class DifferentElementsPageAllureTest extends PageTestBase {
         differentElements.checkRadioButton(SELEN);
 
         //14. Assert that for radiobutton there is a log row and value is corresponded to the status of radiobutton. 
-        differentElements.checkLogs(RADIO_CHANGE.toString() + BRONZE);
+        differentElements.checkLogs(RADIO_CHANGE.toString() + SELEN);
 
         //15. Select in dropdown
         differentElements.selectInDropdown();

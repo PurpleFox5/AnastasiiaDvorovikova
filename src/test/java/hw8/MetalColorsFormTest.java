@@ -2,13 +2,20 @@ package hw8;
 
 import org.testng.annotations.Test;
 
-public class MetalColorsFormTest extends MetalColorstTestInit{
+import static site.JDISite.homePage;
+import static site.JDISite.login;
+import static site.JDISite.metalColorPage;
+
+public class MetalColorsFormTest extends MetalColorsTestInit {
 
     @Test
     public void metalColorsTest() {
-//        homePage.open();
-//        login();
-//        homePage.checkOpened();
+        homePage.open();
+        login();
+        homePage.checkOpened();
+        homePage.checkUserName();
+        homePage.openMetalColorsPage();
+
     }
 
 }

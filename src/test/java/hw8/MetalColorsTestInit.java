@@ -5,7 +5,8 @@ import com.epam.jdi.uitests.web.testng.testRunner.TestNGBase;
 import org.testng.annotations.BeforeSuite;
 import site.JDISite;
 
-public class MetalColorstTestInit extends TestNGBase {
+@SuppressWarnings("unchecked")
+public class MetalColorsTestInit extends TestNGBase {
     @BeforeSuite(alwaysRun = true)
     public void beforeSuite(){
         WebSite.init(JDISite.class);

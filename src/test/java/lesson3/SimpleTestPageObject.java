@@ -48,7 +48,7 @@ public class SimpleTestPageObject extends TestBase {
         assertEquals(driver.getTitle(), "Home Page");
 
         //4.Login
-        homePage.login(Users.PITER_SHAILOVSKII);
+        homePage.login(Users.PITER_CHAILOVSKII);
 
         WebElement mainTitle = driver.findElement(By.cssSelector("h3.main-title"));
 //        assertEquals(mainTitle.getText(), "EPAM FRAMEWORK WISHES…");

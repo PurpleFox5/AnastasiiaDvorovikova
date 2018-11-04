@@ -4,18 +4,25 @@ import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
 import enums.CheckBoxes;
 import enums.RadioButtons;
 import io.qameta.allure.Step;
 import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
+import java.util.regex.Pattern;
 
 import static com.codeborne.selenide.Condition.*;
+import static com.codeborne.selenide.Selenide.page;
+import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
 import static enums.CheckBoxes.values;
+import static org.testng.Assert.assertEquals;
 
-public class DifferentElementsPageCucumber extends BasicPage {
+public class DifferentElementsPageCucumber {
+
+    public DifferentElementsPageCucumber() {
+        page(this);
+    }
 
     @FindBy(xpath = "//select//option[text()='Yellow']")
     private SelenideElement selectOption;
@@ -43,37 +50,42 @@ public class DifferentElementsPageCucumber extends BasicPage {
 
     //===============Methods==========================
 
-
+    @Then("I select checkboxes (.+)")
     @Step
-    public void selectCheckBoxes(CheckBoxes... items) {
-        for (CheckBoxes checkBox : items) {
-            SelenideElement element = checkBoxes.find(text(checkBox.toString()));
+    public void selectCheckBoxes(String value) {
+        Pattern pattern = Pattern.compile(",");
+        String[] values = pattern.split(value);
+        for (String s : values) {
+            SelenideElement element = checkBoxes.find(text(s));
             element.click();
         }
     }
 
-
+    @Then("I select radio (.+)")
     @Step
-    public void selectRadio(RadioButtons... items) {
-        for (RadioButtons radioButton : items) {
-            SelenideElement element = radioButtons.find(text(radioButton.toString()));
-            element.click();
-        }
+    public void selectRadio(String value) {
+        radioButtons.find(text(value)).click();
     }
 
-
+    @Then("I select in dropdown Yellow")
     @Step
     public void selectInDropdown() {
         selectOption.click();
     }
 
-    @Then("There are 2 buttons")
+    @Then("I unselect checkboxes (.+)")
     @Step
-    public void unselectCheckBoxes(CheckBoxes... items) {
-        selectCheckBoxes(items);
+    public void unselectCheckBoxes(String value) {
+        selectCheckBoxes(value);
     }
 
     //===============Check===========================
+
+    @Then("The title is Different Elements$")
+    @Step
+    public void checkTitle() {
+        assertEquals(getWebDriver().getTitle(), "Different Elements");
+    }
 
     @Then("There are 4 checkboxes")
     @Step
@@ -99,6 +111,7 @@ public class DifferentElementsPageCucumber extends BasicPage {
         dropDown.shouldBe(visible);
     }
 
+    @Then("There are 2 buttons")
     @Step
     public void checkButtons() {
         buttons.shouldHaveSize(2);
@@ -119,43 +132,50 @@ public class DifferentElementsPageCucumber extends BasicPage {
         leftSection.should(visible);
     }
 
-
+    @Then("Checkboxes (.+) are checked")
     @Step
-    public void checkCheckBoxes(CheckBoxes... items) {
-        for (CheckBoxes checkBox : items) {
-            SelenideElement element = checkBoxes.find(text(checkBox.toString())).$("input");
+    public void checkCheckBoxes(String value) {
+        Pattern pattern = Pattern.compile(",");
+        String[] values = pattern.split(value);
+        for (String s : values) {
+            SelenideElement element = checkBoxes.find(text(s)).$("input");
             element.shouldBe(Condition.checked);
         }
     }
 
+    @Then("Check logs (.+)")
     @Step
-    public void checkLogs(String... strings) {
+    public void checkLog(String value) {
+        Pattern pattern = Pattern.compile(",");
+        String[] values = pattern.split(value);
         List<SelenideElement> logsList = logs.$$("li");
-        List<SelenideElement> sublist = logsList.subList(0, strings.length);
-        int index = strings.length - 1;
-        for (String s : strings) {
+        List<SelenideElement> sublist = logsList.subList(0, values.length);
+        int index = values.length - 1;
+        for (String s : values) {
             sublist.get(index).should(text(s));
             index--;
         }
     }
 
+    @Then("Radiobutton (.+) is selected")
     @Step
-    public void checkRadioButton(RadioButtons... items) {
-        for (RadioButtons radioButton : items) {
-            SelenideElement element = radioButtons.find(text(radioButton.toString())).$("input");
-            element.shouldBe(selected);
-        }
+    public void checkRadioButton(String value) {
+         radioButtons.find(text(value)).$("input").shouldBe(selected);
     }
 
+    @Then("Dropdown Yellow is selected")
     @Step
     public void checkSelectOption() {
         selectOption.should(selected);
     }
 
+    @Then("Checkboxes (.+) are unchecked")
     @Step
-    public void checkUnselectCheckBoxes(CheckBoxes... items) {
-        for (CheckBoxes checkBox : items) {
-            SelenideElement element = checkBoxes.find(text(checkBox.name())).$("input");
+    public void checkUnselectCheckBoxes(String value) {
+        Pattern pattern = Pattern.compile(",");
+        String[] values = pattern.split(value);
+        for (String s : values) {
+            SelenideElement element = checkBoxes.find(text(s)).$("input");
             element.shouldNotBe(checked);
         }
     }

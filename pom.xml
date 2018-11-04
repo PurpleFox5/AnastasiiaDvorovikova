@@ -35,14 +35,14 @@
 
         <dependency>
             <groupId>io.cucumber</groupId>
-            <artifactId>cucumber-java8</artifactId>
-            <version>3.0.2</version>
+            <artifactId>cucumber-java</artifactId>
+            <version>2.4.0</version>
         </dependency>
 
         <dependency>
             <groupId>io.cucumber</groupId>
             <artifactId>cucumber-testng</artifactId>
-            <version>3.0.2</version>
+            <version>2.4.0</version>
         </dependency>
 
         <dependency>
@@ -91,6 +91,17 @@
             <version>${aspectj.version}</version>
         </dependency>
 
+        <dependency>
+            <groupId>info.cukes</groupId>
+            <artifactId>cucumber-java</artifactId>
+            <version>1.2.5</version>
+        </dependency>
+
+        <dependency>
+            <groupId>info.cukes</groupId>
+            <artifactId>cucumber-testng</artifactId>
+            <version>1.2.5</version>
+        </dependency>
         <!--JDI-->
         <dependency>
             <groupId>com.epam.jdi</groupId>

@@ -1,8 +1,8 @@
 package enums;
 
-public enum Users {
+public enum Users{
 
-    PITER_SHAILOVSKII("PITER CHAILOVSKII", "epam","1234");
+    PITER_CHAILOVSKII("PITER CHAILOVSKII", "epam","1234");
 
     public String name;
     public String login;
@@ -14,4 +14,17 @@ public enum Users {
         this.password = password;
     }
 
+    public static Users getUser(String name){
+        for (Users user : Users.values()) {
+            if (user.name.equalsIgnoreCase(name)) {
+                return user;
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public String toString() {
+        return name;
+    }
 }

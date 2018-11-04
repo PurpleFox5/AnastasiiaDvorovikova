@@ -1,18 +1,16 @@
 package pageObjects;
 
-import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.CollectionCondition;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
-import cucumber.api.PendingException;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-import enums.Users;
 import io.qameta.allure.Step;
 import org.openqa.selenium.support.FindBy;
 
 import static com.codeborne.selenide.CollectionCondition.exactTexts;
-import static com.codeborne.selenide.Condition.*;
-import static com.codeborne.selenide.Selenide.getWebDriverLogs;
+import static com.codeborne.selenide.Condition.text;
+import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.open;
 import static com.codeborne.selenide.Selenide.page;
 import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
@@ -22,7 +20,7 @@ import static org.testng.Assert.assertEquals;
 
 public class HomePageCucumber {
 
-    public HomePageCucumber(){
+    public HomePageCucumber() {
         page(this);
     }
 
@@ -40,6 +38,18 @@ public class HomePageCucumber {
 
     @FindBy(css = ".profile-photo")
     private SelenideElement userName;
+
+    @FindBy(css = ".icons-benefit")
+    private ElementsCollection pictures;
+
+    @FindBy(css = ".benefit-txt")
+    private ElementsCollection texts;
+
+    @FindBy(xpath = "//li[@class='menu-title']//span[text()='Service']")
+    private SelenideElement description;
+
+    @FindBy(css = ".main-txt")
+    private SelenideElement headline;
 
     @FindBy(xpath = "//li[@class='menu-title']//span[text()='Service']")
     private SelenideElement leftService;
@@ -68,8 +78,8 @@ public class HomePageCucumber {
     }
 
     @Step
-    @When("^I login as (.+) epam with password (.+)$")
-    public void login(String name, String passwd){
+    @When("^I login as user (.+) with password (.+)$")
+    public void login(String name, String passwd) {
         profileButton.click();
         login.sendKeys(name);
         password.sendKeys(passwd);
@@ -103,14 +113,33 @@ public class HomePageCucumber {
 
     @Step
     @Then("^The user icon is displayed on the header$")
-    public void checkUserIcon(){
+    public void checkUserIcon() {
         profileButton.shouldBe(visible);
     }
 
     @Step("Check user name {0}")
-    @Then("The user name is PITER CHAILOVSKII")
+    @Then("The user name is (.+)$")
     public void checkUserName(String user) {
         userName.shouldHave(text(user));
+    }
+
+    @Step
+    @Then("There are (\\d+) pictures")
+    public void checkPictures(int count) {
+        pictures.shouldHaveSize(count);
+    }
+
+    @Step
+    @Then("There are (\\d+) texts under pictures")
+    public void checkTextUnderPictures(int count) {
+        texts.shouldHaveSize(count);
+    }
+
+    @Step
+    @Then("There are 2 texts above pictures")
+    public void checkTextAbovePictures() {
+        headline.shouldBe(visible);
+        description.shouldBe(visible);
     }
 
     @Step

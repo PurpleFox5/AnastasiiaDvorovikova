@@ -13,7 +13,7 @@ import pageObjects.HomePage;
 import static com.codeborne.selenide.Selenide.page;
 import static enums.Titles.DATA_PAGE;
 import static enums.Titles.HOME_PAGE;
-import static enums.Users.PITER_SHAILOVSKII;
+import static enums.Users.PITER_CHAILOVSKII;
 
 @Feature("HomeWork5 tests")
 @Story("Data Page Testing")
@@ -38,10 +38,10 @@ public class DataPageTest extends PageTestBase {
         homePage.checkTitle(HOME_PAGE);
 
         //3. Perform login
-        homePage.login(PITER_SHAILOVSKII);
+        homePage.login(PITER_CHAILOVSKII);
 
         //4. Assert User name in the left-top side of screen that user is loggined
-        homePage.checkUserName(PITER_SHAILOVSKII);
+        homePage.checkUserName(PITER_CHAILOVSKII);
 
         //5. Open through the header menu Service -> Dates Page
         homePage.clickHeaderService();

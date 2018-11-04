@@ -11,7 +11,7 @@ import pageObjects.HomePage;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.*;
 import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
-import static enums.Users.PITER_SHAILOVSKII;
+import static enums.Users.PITER_CHAILOVSKII;
 import static java.lang.System.setProperty;
 import static org.testng.Assert.assertEquals;
 
@@ -36,7 +36,7 @@ public class SimpleTestSelenidePageObject extends PageTestBase {
         assertEquals(getWebDriver().getTitle(), "Home Page");
 
         //4.Login
-        homePageSelenide.login(PITER_SHAILOVSKII);
+        homePageSelenide.login(PITER_CHAILOVSKII);
 
         //5. Проверка значения текста
         SelenideElement mainTitle = $("h3.main-title");

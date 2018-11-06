@@ -1,20 +1,33 @@
 package hw8;
 
+import dataProviders.DataProviderJSON;
+import entries.Data;
+import enums.User;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import static site.JDISite.homePage;
-import static site.JDISite.login;
-import static site.JDISite.metalColorPage;
+import static site.JDISite.*;
 
 public class MetalColorsFormTest extends MetalColorsTestInit {
 
-    @Test
-    public void metalColorsTest() {
-        homePage.open();
-        login();
+    @BeforeMethod(alwaysRun = true)
+    public void beforeMethod() {
+        login.submit(new User());
+    }
+
+    @AfterMethod(alwaysRun = true)
+    public void afterMethod() {
+        login.logout();
+    }
+
+    @Test(dataProvider = "dataProviders", dataProviderClass = DataProviderJSON.class)
+    public void metalColorsTest(Data data) {
         homePage.checkOpened();
         homePage.checkUserName();
-        homePage.openMetalColorsPage();
+        openMetalColor();
+        metalsColorsForm.submit(data);
+        checkExample(data);
 
     }
 

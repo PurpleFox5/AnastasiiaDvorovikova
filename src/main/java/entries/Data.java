@@ -5,6 +5,8 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
+// TODO What do you mean 'Data' ?
+// The name of this class should be selected in according to purpose of it.
 public class Data extends DataClass {
 
     @SerializedName("summary")

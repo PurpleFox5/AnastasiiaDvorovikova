@@ -9,6 +9,7 @@ import org.testng.annotations.Test;
 
 import static site.JDISite.*;
 
+// TODO What of the reason of  BeforeMethod and AfterMethod in this particular case ?
 public class MetalColorsFormTest extends MetalColorsTestInit {
 
     @BeforeMethod(alwaysRun = true)
@@ -21,6 +22,7 @@ public class MetalColorsFormTest extends MetalColorsTestInit {
         login.logout();
     }
 
+    // TODO Where is the steps from TestCase as a comments ?
     @Test(dataProvider = "dataProviders", dataProviderClass = DataProviderJSON.class)
     public void metalColorsTest(Data data) {
         homePage.checkOpened();
@@ -28,7 +30,6 @@ public class MetalColorsFormTest extends MetalColorsTestInit {
         openMetalColor();
         metalsColorsForm.submit(data);
         checkExample(data);
-
     }
 
 }

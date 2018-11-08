@@ -10,9 +10,10 @@ import com.epam.jdi.uitests.web.selenium.elements.pageobjects.annotations.object
 import com.epam.jdi.uitests.web.selenium.elements.pageobjects.annotations.objects.JDropdown;
 import com.epam.jdi.uitests.web.selenium.elements.pageobjects.annotations.simple.Css;
 import entries.*;
+import io.qameta.allure.Step;
 import org.openqa.selenium.support.FindBy;
 
-public class MetalsColorsForm extends Form<Data> {
+public class MetalsColorsForm extends Form<MetalsColorsData> {
 
     @FindBy(css = "#odds-selector p")
     public Selector<Odds> odds;
@@ -47,7 +48,8 @@ public class MetalsColorsForm extends Form<Data> {
     @Css("#submit-button")
     public IButton submit;
 
-    public void submit(Data data) {
+    @Step("Fill and submit form Metals & Colors by data")
+    public void submit(MetalsColorsData data) {
         odds.select(data.summaries.get(0));
         even.select(data.summaries.get(1));
 

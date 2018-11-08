@@ -1,10 +1,10 @@
 package hw8;
 
 import dataProviders.DataProviderJSON;
-import entries.Data;
+import entries.MetalsColorsData;
 import enums.User;
 import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import static site.JDISite.*;
@@ -12,23 +12,38 @@ import static site.JDISite.*;
 // TODO What of the reason of  BeforeMethod and AfterMethod in this particular case ?
 public class MetalColorsFormTest extends MetalColorsTestInit {
 
-    @BeforeMethod(alwaysRun = true)
-    public void beforeMethod() {
+    @BeforeClass(alwaysRun = true)
+    public void beforeClass() {
+        //Open HomePage
+        open();
+
+        //Login
         login.submit(new User());
+
+        //Check that homePage is opened
+        homePage.checkOpened();
+
+        //Check user name
+        homePage.checkUserName();
+
+        //Open Metals & Colors page by Header menu
+        openMetalColor();
     }
 
     @AfterMethod(alwaysRun = true)
     public void afterMethod() {
-        login.logout();
+        metalColorPage.refresh();
     }
 
-    // TODO Where is the steps from TestCase as a comments ?
     @Test(dataProvider = "dataProviders", dataProviderClass = DataProviderJSON.class)
-    public void metalColorsTest(Data data) {
-        homePage.checkOpened();
-        homePage.checkUserName();
-        openMetalColor();
+    public void metalColorsTest(MetalsColorsData data) {
+        //Check that metalColorPage is opened
+        metalColorPage.checkOpened();
+
+        //Fill form Metals & Colors by data
         metalsColorsForm.submit(data);
+
+        //Check result sections
         checkExample(data);
     }
 

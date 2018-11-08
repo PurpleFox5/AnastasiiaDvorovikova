@@ -1,5 +1,7 @@
 # Created by .ignore support plugin (hsz.mobi)
 /.idea/
-# TODO this wont work for me. '-' is missing ?
-/DvorovikovaAnastasiia.iml
-# TODO Binaries directory ??
+/*.iml
+/target
+/.logs
+/build
+/.allure

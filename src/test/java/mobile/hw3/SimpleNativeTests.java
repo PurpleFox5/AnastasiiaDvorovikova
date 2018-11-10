@@ -1,13 +1,12 @@
 package mobile.hw3;
 
-import mobile.PropertyFile;
 import org.openqa.selenium.By;
 import org.testng.annotations.Test;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
-import static mobile.Driver.getDriver;
+import static mobile.hw3.Driver.getDriver;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 

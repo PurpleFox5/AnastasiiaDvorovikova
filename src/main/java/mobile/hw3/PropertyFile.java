@@ -1,4 +1,4 @@
-package mobile;
+package mobile.hw3;
 
 public enum PropertyFile {
 

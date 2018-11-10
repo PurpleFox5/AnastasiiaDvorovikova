@@ -1,4 +1,4 @@
-package mobile;
+package mobile.hw3;
 
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.remote.MobileCapabilityType;
@@ -17,8 +17,8 @@ public class Driver {
     private static DesiredCapabilities capabilities;
 
     // Properties to be read
-    public static String AUT; // (mobile) app
-    public static String SUT; // site under testing
+    private static String AUT; // (mobile) app
+    static String SUT; // site under testing
     private static String TEST_PLATFORM;
     private static String DRIVER;
 
@@ -50,7 +50,7 @@ public class Driver {
         return driverSingle;
     }
 
-    public static WebDriverWait getDriverWait() throws Exception {
+    public static WebDriverWait getDriverWait() {
         // Set an object to handle timeouts
         if (waitSingle == null) {
             waitSingle = new WebDriverWait(driverSingle, 10);

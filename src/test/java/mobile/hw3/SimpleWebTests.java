@@ -1,7 +1,5 @@
 package mobile.hw3;
 
-import com.codeborne.selenide.ElementsCollection;
-import mobile.PropertyFile;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -9,7 +7,7 @@ import org.testng.annotations.Test;
 
 import java.util.List;
 
-import static mobile.Driver.*;
+import static mobile.hw3.Driver.*;
 import static org.testng.Assert.assertTrue;
 import static org.testng.Assert.assertEquals;
 

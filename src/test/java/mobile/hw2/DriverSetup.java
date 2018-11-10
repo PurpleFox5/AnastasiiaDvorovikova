@@ -1,7 +1,6 @@
 package mobile.hw2;
 
 import io.appium.java_client.android.AndroidDriver;
-import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 import java.io.File;
@@ -21,7 +20,6 @@ public class DriverSetup {
         capabilities.setCapability("deviceName", deviceName);
 //        capabilities.setCapability("deviceName", emulator);
         capabilities.setCapability("platformName", "Android");
-        capabilities.setCapability("noReset", true);
 
         //Path to app
         File app = new File("src\\main\\resources\\ContactManager.apk");

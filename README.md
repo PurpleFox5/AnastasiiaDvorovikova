@@ -1,4 +1,4 @@
-HW2:
+**HW2:**
 1.	Setup project that has been discussed in the class. Make sure you can run both tests (native an d web) successfully.
 2.	For existing native mobile autotest try to use another locator (xpath, classname, ?). Define these locators using Appium Inspector. Are there any difference with id version?
 Локатор id состоит из названия пакета + “:id/” + id элемента
@@ -28,3 +28,19 @@ Xpath медленный и Appium советует “Using XPath locators is n
 Неправильная стркутура проекта (не тестовые классы находятся в ветке src/test)
 Были абсолютные пути, из-за которых будет не запустить наши тесты другому пользователю со своего компьютера, исправлены на пути относительно проекта
 Лучше использовать enum MobileCapabilityType.DEVICE_NAME вместо “deviceName” и других параметров Capability
+
+**HW3:**
+1.	Rewrite (complete) Driver using “singleton” pattern. Are there any advantages?
+Нужно добавить в класс приватное статическое поле, содержащее Singleton объект;
+Сделать конструктор класса приватным;
+Объявить статический создающий метод, который будет использоваться для получения единственного экземпляра драйвера.
+2.	Suggest improvements for .properties reading. What are the purposes?
+Разделим .properties на webproperties и nativeproperties.
+Для загрузки и чтения properties не создаем отдельный класс, а читаем properties в классе Driver, который получает на вход enum PropertyFile;
+Загружаем properties в try-with-resources, а читаем стандартным методом класса java.util.Properties getProperty(String key).
+5.	Which checks would you place in the “web” test?
+Проверить заголовок «Internet Assigned Numbers Authority»
+Проверить отображается ли изображение “iana”
+Проверить, что количество блоков = 3, а так же их заголовки
+Перейти на другую страницу, проверить заголовок
+

@@ -17,7 +17,7 @@ public class SimpleNativeTests {
     public void simplestTest() throws Exception {
         String app_package_name = "com.example.android.contactmanager:id/";
 
-        getDriver(PropertyFile.NATIVE_PROPORTY).findElement(By.id(app_package_name + "addContactButton")).click();
+        getDriver().findElement(By.id(app_package_name + "addContactButton")).click();
 
         //Check Target Account, Contact Name, Contact phone appears
         assertEquals(getDriver().findElementByAccessibilityId("Target Account").getText(), "Target Account");

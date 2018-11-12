@@ -10,6 +10,8 @@ import org.testng.annotations.Test;
 import static site.JDISite.*;
 
 // TODO What of the reason of  BeforeMethod and AfterMethod in this particular case ?
+// TODO Once again, you should create a one single tests with specific steps.
+// TODO Why don't you do that just in @Test method ?
 public class MetalColorsFormTest extends MetalColorsTestInit {
 
     @BeforeClass(alwaysRun = true)
@@ -23,6 +25,7 @@ public class MetalColorsFormTest extends MetalColorsTestInit {
         //Check that homePage is opened
         homePage.checkOpened();
 
+        // TODO This method should be parametrised.
         //Check user name
         homePage.checkUserName();
 

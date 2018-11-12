@@ -3,21 +3,22 @@ package hw8;
 import dataProviders.DataProviderJSON;
 import entries.MetalsColorsData;
 import enums.User;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static site.JDISite.*;
 
-// TODO What of the reason of  BeforeMethod and AfterMethod in this particular case ?
-// TODO Once again, you should create a one single tests with specific steps.
-// TODO Why don't you do that just in @Test method ?
 public class MetalColorsFormTest extends MetalColorsTestInit {
 
-    @BeforeClass(alwaysRun = true)
-    public void beforeClass() {
+    @BeforeMethod(alwaysRun = true)
+    public void beforeMethod() {
+        metalColorPage.clearCache();
+    }
+
+    @Test(dataProvider = "dataProviders", dataProviderClass = DataProviderJSON.class)
+    public void metalColorsTest(MetalsColorsData data) {
         //Open HomePage
-        open();
+        homePage.open();
 
         //Login
         login.submit(new User());
@@ -25,21 +26,12 @@ public class MetalColorsFormTest extends MetalColorsTestInit {
         //Check that homePage is opened
         homePage.checkOpened();
 
-        // TODO This method should be parametrised.
         //Check user name
-        homePage.checkUserName();
+        homePage.checkUserName(new User());
 
         //Open Metals & Colors page by Header menu
         openMetalColor();
-    }
 
-    @AfterMethod(alwaysRun = true)
-    public void afterMethod() {
-        metalColorPage.refresh();
-    }
-
-    @Test(dataProvider = "dataProviders", dataProviderClass = DataProviderJSON.class)
-    public void metalColorsTest(MetalsColorsData data) {
         //Check that metalColorPage is opened
         metalColorPage.checkOpened();
 
@@ -49,5 +41,4 @@ public class MetalColorsFormTest extends MetalColorsTestInit {
         //Check result sections
         checkExample(data);
     }
-
 }

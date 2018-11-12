@@ -1,4 +1,4 @@
-package mobile.hw3;
+package mobile.hw4;
 
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.remote.MobileCapabilityType;
@@ -32,6 +32,7 @@ public class Driver {
         TEST_PLATFORM = currentProps.getProperty("platform");
         DRIVER = currentProps.getProperty("driver");
         DEVICE_NAME = currentProps.getProperty("devicename");
+
     }
 
     public static AppiumDriver getDriver(PropertyFile propertyFile) throws Exception {

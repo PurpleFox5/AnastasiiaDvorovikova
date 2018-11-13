@@ -1,30 +1,34 @@
-package mobile.hw3;
+package mobile.hw4;
 
+import io.appium.java_client.android.AndroidDriver;
+import mobile.hw3.PropertyFile;
 import org.openqa.selenium.By;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
+import org.testng.annotations.AfterSuite;
+import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-
-import static mobile.hw3.Driver.getDriver;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
+import static mobile.hw4.DriverCapabilitiesFromJson.getDriver;
+//import static mobile.hw4.Driver.getDriver;
+
+@Test
 public class SimpleNativeTests {
 
-    @BeforeClass
+    @BeforeSuite
     public void setNative() throws Exception {
-        getDriver(PropertyFile.NATIVE_PROPERTY);
+//        getDriver(PropertyFile.NATIVE_PROPERTY);
+        getDriver(PropertyFile.ANDROID_NATIVE); //Capabilities from JSON File
         System.out.println("Driver is prepared");
     }
 
-    @AfterClass
+    @AfterSuite
     public void tearDown() throws Exception {
-        getDriver().close();
+        getDriver().quit();
         System.out.println("Driver is closed");
     }
+
 
     @Test(description = "Click on button 'Add contact', check elements, check virtual keyboard")
     public void simplestTest() throws Exception {
@@ -43,14 +47,9 @@ public class SimpleNativeTests {
         assertTrue(getDriver().findElement(By.id(app_package_name + "contactEmailEditText")).isDisplayed());
 
         //Check virtual keyboard appears
-        Process process = Runtime.getRuntime().exec("adb shell dumpsys input_method | grep mInputShown");
-        try (BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()))) {
-            String output = reader.readLine();
-            assertTrue(Boolean.parseBoolean(output.substring(output.lastIndexOf("=") + 1)));
-        }
+        assertTrue(((AndroidDriver) getDriver()).isKeyboardShown());
 
         System.out.println("Simplest Native test done");
     }
-
 }
 

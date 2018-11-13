@@ -18,9 +18,7 @@ Feature: Different Elements tests
     When I click on Service subcategory in the header
     When I open through the header menu Service -> Different Elements Page
 
-  Scenario: Different Elements Interface Test
     Then The title is Different Elements
-
     Then There are 4 checkboxes
     And There are 4 radioButtons
     And There is 1 dropdown

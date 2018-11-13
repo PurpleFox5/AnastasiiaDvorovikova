@@ -1,7 +1,10 @@
-package mobile.hw3;
+package mobile.hw4;
 
 import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.remote.AndroidMobileCapabilityType;
+import io.appium.java_client.remote.IOSMobileCapabilityType;
 import io.appium.java_client.remote.MobileCapabilityType;
+import mobile.hw3.PropertyFile;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -22,19 +25,25 @@ public class Driver {
     private static String TEST_PLATFORM;
     private static String DRIVER;
     private static String DEVICE_NAME;
+    private static String APP_PACKAGE;
+    private static String APP_ACTIVITY;
+    private static String UDID;
 
     private static Properties currentProps = new Properties();
 
     private Driver() {
         AUT = currentProps.getProperty("aut");
         String t_sut = currentProps.getProperty("sut");
-        SUT = t_sut == null ? null : "http://" + t_sut;
+        SUT = t_sut == null ? null : "https://" + t_sut;
         TEST_PLATFORM = currentProps.getProperty("platform");
         DRIVER = currentProps.getProperty("driver");
         DEVICE_NAME = currentProps.getProperty("deviceName");
+        APP_PACKAGE = currentProps.getProperty("appPackage");
+        APP_ACTIVITY = currentProps.getProperty("appActivity");
+        UDID = currentProps.getProperty("udid");
     }
 
-    static AppiumDriver getDriver(PropertyFile propertyFile) throws Exception {
+    public static AppiumDriver getDriver(PropertyFile propertyFile) throws Exception {
         try (FileInputStream in = new FileInputStream(System.getProperty("user.dir") + "/src/main/resources/" + propertyFile)) {
             currentProps.load(in);
         }
@@ -52,10 +61,10 @@ public class Driver {
         return driverSingle;
     }
 
-    static WebDriverWait getDriverWait() {
+    public static WebDriverWait getDriverWait() {
         // Set an object to handle timeouts
         if (waitSingle == null) {
-            waitSingle = new WebDriverWait(driverSingle, 10);
+            waitSingle = new WebDriverWait(driverSingle, 20);
         }
         return waitSingle;
     }
@@ -66,13 +75,15 @@ public class Driver {
         capabilities = new DesiredCapabilities();
         String browserName;
 
+        capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, DEVICE_NAME);
         // Setup test platform: Android or iOS. Browser also depends on a platform.
         switch (TEST_PLATFORM) {
             case "Android":
-                capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, DEVICE_NAME);
                 browserName = "Chrome";
                 break;
             case "iOS":
+                capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, DEVICE_NAME);
+                capabilities.setCapability(MobileCapabilityType.UDID, UDID);
                 browserName = "Safari";
                 break;
             default:
@@ -88,6 +99,10 @@ public class Driver {
         } else if (SUT != null && AUT == null) {
             // Web
             capabilities.setCapability(MobileCapabilityType.BROWSER_NAME, browserName);
+        }else if (APP_PACKAGE!=null){
+            capabilities.setCapability("appPackage", APP_PACKAGE);
+//            capabilities.setCapability("autoLaunch",true);
+            capabilities.setCapability("appActivity", APP_PACKAGE + APP_ACTIVITY);
         } else {
             throw new Exception("Unclear type of mobile app");
         }

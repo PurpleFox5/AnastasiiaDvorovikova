@@ -6,8 +6,9 @@ import com.google.gson.reflect.TypeToken;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.ios.IOSDriver;
+import io.appium.java_client.remote.AndroidMobileCapabilityType;
 import io.appium.java_client.remote.MobileCapabilityType;
-import mobile.hw3.PropertyFile;
+import mobile.hw4.PropertyFile;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -108,14 +109,13 @@ public class DriverCapabilitiesFromJson {
         if (AUT != null && SUT == null) {
             // Native
             File app = new File(AUT);
+            capabilities.setCapability("autoLaunch",true);
+            capabilities.setCapability("appPackage", APP_PACKAGE);
+            capabilities.setCapability("appActivity", APP_PACKAGE + APP_ACTIVITY);
             capabilities.setCapability(MobileCapabilityType.APP, app.getAbsolutePath());
         } else if (SUT != null && AUT == null) {
             // Web
             capabilities.setCapability(MobileCapabilityType.BROWSER_NAME, browserName);
-        } else if (APP_PACKAGE != null) {
-            capabilities.setCapability("appPackage", APP_PACKAGE);
-//            capabilities.setCapability("autoLaunch",true);
-            capabilities.setCapability("appActivity", APP_PACKAGE + APP_ACTIVITY);
         } else {
             throw new Exception("Unclear type of mobile app");
         }

@@ -1,6 +1,5 @@
 package mobile.hw4;
 
-import mobile.hw3.PropertyFile;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -19,7 +18,7 @@ public class SimpleWebTests {
 
     @BeforeSuite
     public void setWeb() throws Exception {
-//        getDriver(PropertyFile.WEB_PROPERTY);
+//        getDriver(WEB_PROPERTY);
         getDriver(PropertyFile.IOS_WEB);
         System.out.println("Driver prepared");
     }

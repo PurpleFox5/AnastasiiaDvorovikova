@@ -2,6 +2,8 @@
 1.	Add support of appPackage and appActivity parameters for Android devices (reading from a .properties file and then setting in the DesiredCapabilities). Locally installed Appium DT has no need in these parameters, but for Appium server of Minsk Mobile Farm it’s mandatory.
 Нужно на самой ферме выбрать вкладку Native на нужном устройстве, загрузить приложение в package выбрать com.example.android.contactmanager, а в Activity .ContactManager, а после уже запускать тесты
 a.	Or try to use autoLaunch capability with app as before. Does this approach work?
+Для того, чтобы установка приложения на устройстве проходила автоматически необхоимо в DesiredCapabilities добавить autoLaunch к уже прописанным путем до APP, appPackage и appActivity.
+
 2.	Change settings to run web test on a certain iOS device on Mobile Test Farm. Run test with your changes. Did test pass?
 Да, тест проходит
 Были добавлены название устройства и udid в webtest.properties

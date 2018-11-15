@@ -3,16 +3,18 @@ package hw8;
 import dataProviders.DataProviderJSON;
 import entries.MetalsColorsData;
 import enums.User;
-import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
 
 import static site.JDISite.*;
 
 public class MetalColorsFormTest extends MetalColorsTestInit {
 
-    @BeforeMethod(alwaysRun = true)
-    public void beforeMethod() {
-        metalColorPage.clearCache();
+    static private User PiterChailovskii = new User("PITER CHAILOVSKII", "epam", "1234");
+
+    @AfterMethod
+    public void afterMethod() {
+        homePage.clearCache();
     }
 
     @Test(dataProvider = "dataProviders", dataProviderClass = DataProviderJSON.class)
@@ -20,16 +22,14 @@ public class MetalColorsFormTest extends MetalColorsTestInit {
         //Open HomePage
         homePage.open();
 
-        // TODO Have you heard about variables | enums | static fields and so on
-        // TODO This is not really good idea to create exactly the same User twice
         //Login
-        login.submit(new User());
+        homePage.login.submit(PiterChailovskii);
 
         //Check that homePage is opened
         homePage.checkOpened();
 
         //Check user name
-        homePage.checkUserName(new User());
+        homePage.checkUserName(PiterChailovskii);
 
         //Open Metals & Colors page by Header menu
         openMetalColor();
@@ -38,9 +38,9 @@ public class MetalColorsFormTest extends MetalColorsTestInit {
         metalColorPage.checkOpened();
 
         //Fill form Metals & Colors by data
-        metalsColorsForm.submit(data);
+        metalColorPage.metalsColorsForm.submit(data);
 
         //Check result sections
-        checkExample(data);
+        metalColorPage.checkExample(data);
     }
 }

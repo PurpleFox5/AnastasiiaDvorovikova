@@ -11,6 +11,7 @@ import org.openqa.selenium.support.FindBy;
 import static com.epam.jdi.uitests.web.selenium.elements.base.JdiStatic.$;
 
 public class LoginForm extends Form<User> {
+
     @FindBy(id = "Name")
     public TextField name;
     @FindBy(id = "Password")

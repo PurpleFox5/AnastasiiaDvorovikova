@@ -20,6 +20,8 @@ public class MetalColorsFormTest extends MetalColorsTestInit {
         //Open HomePage
         homePage.open();
 
+        // TODO Have you heard about variables | enums | static fields and so on
+        // TODO This is not really good idea to create exactly the same User twice
         //Login
         login.submit(new User());
 

@@ -27,6 +27,7 @@ public class JDISite extends WebSite {
     @JPage(url = "/metals-colors.html", title = "Metal and Colors")
     public static MetalColorPage metalColorPage;
 
+    // TODO This should be encapsulate in Page
     public static MetalsColorsForm metalsColorsForm;
 
     @FindBy(css = ".nav")
@@ -34,12 +35,14 @@ public class JDISite extends WebSite {
 
     @FindBy(css = ".results")
     public static TextList<Enum> resultsLog;
+    // !TODO
 
     @Step("Open Metals & Colors page by Header menu")
     public static void openMetalColor() {
         navigation.select("Metals & Colors");
     }
 
+    // TODO And this
     @Step("Check result sections")
     public static void checkExample(MetalsColorsData data) {
         int sum = Integer.parseInt(data.summaries.get(0)) + Integer.parseInt(data.summaries.get(1));

@@ -3,10 +3,7 @@ package mobile.hw3;
 public enum PropertyFile {
 
     WEB_PROPERTY("webtest.properties"),
-    NATIVE_PROPERTY("nativetest.properties"),
-
-    ANDROID_NATIVE("androidNative"),
-    IOS_WEB("iOsWeb");
+    NATIVE_PROPERTY("nativetest.properties");
 
     String value;
 

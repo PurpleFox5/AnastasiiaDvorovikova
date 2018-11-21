@@ -130,6 +130,10 @@ public class YandexSpellerConstants {
         }
     }
 
+    public enum TypeRequest {
+        POST, PUT, PATCH, DELETE, OPTIONS, HEAD, GET
+    }
+
 }
 
 

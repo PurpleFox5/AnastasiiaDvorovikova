@@ -21,6 +21,7 @@ import static testApi.YandexSpellerConstants.Language.WRONG_LANGUAGE;
 import static testApi.YandexSpellerConstants.Options.*;
 import static testApi.YandexSpellerConstants.StatusLine.SL_BAD_REQUEST;
 import static testApi.YandexSpellerConstants.StatusLine.SL_METHOD_NOT_ALLOWED;
+import static testApi.YandexSpellerConstants.TypeRequest.*;
 
 public class TestYandexSpeller {
 
@@ -29,7 +30,7 @@ public class TestYandexSpeller {
         List<List<YandexSpellerAnswer>> answers = YandexSpellerAPI.getYandexSpellerAnswers(
                 YandexSpellerAPI.with()
                         .text(CORRECT_WORD.word)
-                        .callGetApi());
+                        .callApi(GET));
         assertThat("Expected number of answers is wrong.", answers.get(0).size(), equalTo(0));
     }
 
@@ -38,7 +39,7 @@ public class TestYandexSpeller {
         YandexSpellerAPI.with()
                 .language(EN)
                 .text(REQUISITE.word, MOTHER.word)
-                .callGetApi()
+                .callApi(GET)
                 .then()
                 .specification(successResponse(Matchers.allOf(
                         Matchers.stringContainsInOrder(Arrays.asList(REQUISITE.word, REQUISITE.s, MOTHER.word, MOTHER.s)),
@@ -50,7 +51,7 @@ public class TestYandexSpeller {
         YandexSpellerAPI.with()
                 .language(EN)
                 .text(DIFFERENT_LETTERS.word)
-                .callGetApi()
+                .callApi(GET)
                 .then()
                 .specification(successResponse(Matchers.allOf(Matchers.containsString(ERROR_CAPITALIZATION.toString()))));
     }
@@ -62,7 +63,7 @@ public class TestYandexSpeller {
                         .language(EN)
                         .text(DIFFERENT_LETTERS.word)
                         .options(IGNORE_CAPITALIZATION.toString())
-                        .callGetApi());
+                        .callApi(GET));
         assertThat("Expected number of answers is wrong.", answers.get(0).size(), equalTo(0));
     }
 
@@ -71,7 +72,7 @@ public class TestYandexSpeller {
         YandexSpellerAPI.with()
                 .text(REPEAT.word, REPEAT.word)
                 .options(FIND_REPEAT_WORDS.toString())
-                .callGetApi()
+                .callApi(GET)
                 .then()
                 .specification(successResponse(Matchers.allOf(Matchers.containsString(ERROR_REPEAT_WORD.toString()))));
     }
@@ -81,7 +82,7 @@ public class TestYandexSpeller {
         YandexSpellerAPI.with()
                 .language(EN)
                 .text(WITH_DIGITS.word)
-                .callGetApi()
+                .callApi(GET)
                 .then()
                 .specification(successResponse(Matchers.allOf(
                         Matchers.stringContainsInOrder(Arrays.asList(WITH_DIGITS.word, WITH_DIGITS.s)),
@@ -94,7 +95,7 @@ public class TestYandexSpeller {
                 YandexSpellerAPI.with()
                         .text(WORD_WITH_LEADING_DIGITS.word)
                         .options(IGNORE_DIGITS.toString())
-                        .callGetApi());
+                        .callApi(GET));
         assertThat("Expected number of answers is wrong.", answers.get(0).size(), equalTo(0));
     }
 
@@ -103,13 +104,13 @@ public class TestYandexSpeller {
         List<List<YandexSpellerAnswer>> firstList = YandexSpellerAPI.getYandexSpellerAnswers(
                 YandexSpellerAPI.with()
                         .text(MOTHER.word)
-                        .callGetApi());
+                        .callApi(GET));
         System.out.println(repeat("=", 50));
         List<String> correctWord = firstList.get(0).get(0).s;
 
         YandexSpellerAPI.with()
                 .text(correctWord)
-                .callGetApi()
+                .callApi(GET)
                 .then()
                 .specification(successResponse());
     }
@@ -119,7 +120,7 @@ public class TestYandexSpeller {
         YandexSpellerAPI.with()
                 .language(EN)
                 .text(SPLIT_PHRASE.word)
-                .callGetApi()
+                .callApi(GET)
                 .then()
                 .specification(successResponse(Matchers.allOf(
                         Matchers.stringContainsInOrder(Arrays.asList(SPLIT_PHRASE.word, SPLIT_PHRASE.s)),
@@ -131,7 +132,7 @@ public class TestYandexSpeller {
         YandexSpellerAPI.with()
                 .language(WRONG_LANGUAGE)
                 .text(REQUISITE.word)
-                .callGetApi()
+                .callApi(GET)
                 .then()
                 .specification(responseWithMistakes(HttpStatus.SC_BAD_REQUEST, SL_BAD_REQUEST.toString(), LANG.toString()));
     }
@@ -142,7 +143,7 @@ public class TestYandexSpeller {
                 .text(REQUISITE.word)
                 .language(EN)
                 .format(WRONG_FORMAT)
-                .callGetApi()
+                .callApi(GET)
                 .then()
                 .specification(responseWithMistakes(HttpStatus.SC_BAD_REQUEST, SL_BAD_REQUEST.toString(), FORMAT.toString()));
     }
@@ -151,7 +152,7 @@ public class TestYandexSpeller {
     public void tryNotAllowedMethods() {
         YandexSpellerAPI.with()
                 .text(REQUISITE.word)
-                .callPatchApi()
+                .callApi(PATCH)
                 .then()
                 .specification(responseWithMistakes(HttpStatus.SC_METHOD_NOT_ALLOWED, SL_METHOD_NOT_ALLOWED.toString(),
                         METHOD.toString()));
@@ -159,7 +160,7 @@ public class TestYandexSpeller {
 
         YandexSpellerAPI.with()
                 .text(REQUISITE.word)
-                .callPutApi()
+                .callApi(PUT)
                 .then()
                 .specification(responseWithMistakes(HttpStatus.SC_METHOD_NOT_ALLOWED, SL_METHOD_NOT_ALLOWED.toString(),
                         METHOD.toString()));
@@ -167,7 +168,7 @@ public class TestYandexSpeller {
 
         YandexSpellerAPI.with()
                 .text(REQUISITE.word)
-                .callDeleteApi()
+                .callApi(DELETE)
                 .then()
                 .specification(responseWithMistakes(HttpStatus.SC_METHOD_NOT_ALLOWED, SL_METHOD_NOT_ALLOWED.toString(),
                         METHOD.toString()));

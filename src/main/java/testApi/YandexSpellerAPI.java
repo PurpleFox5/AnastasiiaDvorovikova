@@ -6,6 +6,7 @@ import io.restassured.RestAssured;
 import io.restassured.builder.ResponseSpecBuilder;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
+import io.restassured.specification.RequestSpecification;
 import io.restassured.specification.ResponseSpecification;
 import org.apache.http.HttpStatus;
 import org.hamcrest.Matcher;
@@ -65,62 +66,29 @@ public class YandexSpellerAPI {
             return this;
         }
 
-        Response callGetApi() {
-            return RestAssured.with()
+        Response callApi(TypeRequest s) {
+            RequestSpecification r = RestAssured.with()
                     .queryParam(PARAM_TEXT, spellerApi.texts)
                     .queryParams(spellerApi.params)
-                    .log().all()
-                    .get(YANDEX_SPELLER_API_URI).prettyPeek();
+                    .log().all();
+            switch (s) {
+                case POST:
+                    return r.post(YANDEX_SPELLER_API_URI).prettyPeek();
+                case PUT:
+                    return r.put(YANDEX_SPELLER_API_URI).prettyPeek();
+                case PATCH:
+                    return r.patch(YANDEX_SPELLER_API_URI).prettyPeek();
+                case DELETE:
+                    return r.delete(YANDEX_SPELLER_API_URI).prettyPeek();
+                case OPTIONS:
+                    return r.options(YANDEX_SPELLER_API_URI).prettyPeek();
+                case HEAD:
+                    return r.head(YANDEX_SPELLER_API_URI).prettyPeek();
+                case GET:
+                default:
+                    return r.get(YANDEX_SPELLER_API_URI).prettyPeek();
+            }
         }
-
-        Response callPostApi() {
-            return RestAssured.with()
-                    .queryParam(PARAM_TEXT, spellerApi.texts)
-                    .queryParams(spellerApi.params)
-                    .log().all()
-                    .post(YANDEX_SPELLER_API_URI).prettyPeek();
-        }
-
-        Response callPutApi() {
-            return RestAssured.with()
-                    .queryParam(PARAM_TEXT, spellerApi.texts)
-                    .queryParams(spellerApi.params)
-                    .log().all()
-                    .put(YANDEX_SPELLER_API_URI).prettyPeek();
-        }
-
-        Response callPatchApi() {
-            return RestAssured.with()
-                    .queryParam(PARAM_TEXT, spellerApi.texts)
-                    .queryParams(spellerApi.params)
-                    .log().all()
-                    .patch(YANDEX_SPELLER_API_URI).prettyPeek();
-        }
-
-        public Response callHeadApi() {
-            return RestAssured.with()
-                    .queryParam(PARAM_TEXT, spellerApi.texts)
-                    .queryParams(spellerApi.params)
-                    .log().all()
-                    .head(YANDEX_SPELLER_API_URI).prettyPeek();
-        }
-
-        Response callOptionsApi() {
-            return RestAssured.with()
-                    .queryParam(PARAM_TEXT, spellerApi.texts)
-                    .queryParams(spellerApi.params)
-                    .log().all()
-                    .options(YANDEX_SPELLER_API_URI).prettyPeek();
-        }
-
-        Response callDeleteApi() {
-            return RestAssured.with()
-                    .queryParam(PARAM_TEXT, spellerApi.texts)
-                    .queryParams(spellerApi.params)
-                    .log().all()
-                    .delete(YANDEX_SPELLER_API_URI).prettyPeek();
-        }
-
     }
 
     static ResponseSpecification successResponse() {

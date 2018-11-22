@@ -5,8 +5,8 @@ import com.google.gson.reflect.TypeToken;
 import io.restassured.RestAssured;
 import io.restassured.builder.ResponseSpecBuilder;
 import io.restassured.http.ContentType;
+import io.restassured.http.Method;
 import io.restassured.response.Response;
-import io.restassured.specification.RequestSpecification;
 import io.restassured.specification.ResponseSpecification;
 import org.apache.http.HttpStatus;
 import org.hamcrest.Matcher;
@@ -25,6 +25,7 @@ public class YandexSpellerAPI {
     private static final String YANDEX_SPELLER_API_URI = "https://speller.yandex.net/services/spellservice.json/checkTexts";
     private HashMap<String, String> params = new HashMap<>();
     private List<String> texts = new ArrayList<>();
+    private Method method = Method.GET;
 
     private YandexSpellerAPI() {
     }
@@ -66,28 +67,17 @@ public class YandexSpellerAPI {
             return this;
         }
 
-        Response callApi(TypeRequest s) {
-            RequestSpecification r = RestAssured.with()
+        ApiBuilder httpMethod(Method method) {
+            spellerApi.method = method;
+            return this;
+        }
+
+        Response callApi() {
+            return RestAssured.with()
                     .queryParam(PARAM_TEXT, spellerApi.texts)
                     .queryParams(spellerApi.params)
-                    .log().all();
-            switch (s) {
-                case POST:
-                    return r.post(YANDEX_SPELLER_API_URI).prettyPeek();
-                case PUT:
-                    return r.put(YANDEX_SPELLER_API_URI).prettyPeek();
-                case PATCH:
-                    return r.patch(YANDEX_SPELLER_API_URI).prettyPeek();
-                case DELETE:
-                    return r.delete(YANDEX_SPELLER_API_URI).prettyPeek();
-                case OPTIONS:
-                    return r.options(YANDEX_SPELLER_API_URI).prettyPeek();
-                case HEAD:
-                    return r.head(YANDEX_SPELLER_API_URI).prettyPeek();
-                case GET:
-                default:
-                    return r.get(YANDEX_SPELLER_API_URI).prettyPeek();
-            }
+                    .log().all()
+                    .request(spellerApi.method, YANDEX_SPELLER_API_URI);
         }
     }
 

@@ -52,8 +52,8 @@ public class YandexSpellerAPI {
             return this;
         }
 
-        ApiBuilder options(String options) {
-            spellerApi.params.put(PARAM_OPTIONS, options);
+        ApiBuilder options(Options options) {
+            spellerApi.params.put(PARAM_OPTIONS, options.toString());
             return this;
         }
 
@@ -100,12 +100,12 @@ public class YandexSpellerAPI {
                 .build();
     }
 
-    static ResponseSpecification responseWithMistakes(int status, String statusLine, String message) {
+    static ResponseSpecification responseWithMistakes(int status, StatusLine statusLine, InvalidParameter message) {
         return new ResponseSpecBuilder()
                 .expectStatusCode(status)
-                .expectStatusLine(statusLine)
+                .expectStatusLine(statusLine.toString())
                 .expectHeader("Connection", "keep-alive")
-                .expectHeader("SpellerService", message)
+                .expectHeader("SpellerService", message.toString())
                 .expectResponseTime(lessThan(20000L))
                 .build();
     }

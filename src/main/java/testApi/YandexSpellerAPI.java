@@ -77,7 +77,8 @@ public class YandexSpellerAPI {
                     .queryParam(PARAM_TEXT, spellerApi.texts)
                     .queryParams(spellerApi.params)
                     .log().all()
-                    .request(spellerApi.method, YANDEX_SPELLER_API_URI);
+                    .request(spellerApi.method, YANDEX_SPELLER_API_URI)
+                    .prettyPeek();
         }
     }
 

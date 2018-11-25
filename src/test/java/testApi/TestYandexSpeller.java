@@ -11,7 +11,9 @@ import static org.apache.commons.lang3.StringUtils.repeat;
 import static org.apache.http.HttpStatus.SC_BAD_REQUEST;
 import static org.apache.http.HttpStatus.SC_METHOD_NOT_ALLOWED;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.contains;
 import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.not;
 import static testApi.YandexSpellerAPI.responseWithMistakes;
 import static testApi.YandexSpellerAPI.successResponse;
 import static testApi.YandexSpellerConstants.ErrorCodes.*;
@@ -49,12 +51,16 @@ public class TestYandexSpeller {
 
     @Test
     public void wordWithUppercaseLetters() {
+        List<List<YandexSpellerAnswer>> answers = YandexSpellerAPI.getYandexSpellerAnswers(
         YandexSpellerAPI.with()
                 .language(EN)
                 .text(DIFFERENT_LETTERS.word)
-                .callApi()
-                .then()
-                .specification(successResponse(Matchers.allOf(Matchers.containsString(ERROR_CAPITALIZATION.toString()))));
+                .callApi());
+        assertThat("Expected number of answers is wrong.", answers.get(0).size(), not(0));
+        assertThat("Expected error \"Incorrect use of uppercase and lowercase letters.\"",
+                "\"code\":" + answers.get(0).get(0).getCode(), equalTo(ERROR_CAPITALIZATION.toString()));
+        assertThat("Expected word is wrong", answers.get(0).get(0).getWord(), equalTo(DIFFERENT_LETTERS.word));
+        assertThat("Expected result is wrong", answers.get(0).get(0).getS(), equalTo(DIFFERENT_LETTERS.s));
     }
 
     @Test
@@ -70,24 +76,30 @@ public class TestYandexSpeller {
 
     @Test
     public void repeatedWord() {
-        YandexSpellerAPI.with()
-                .text(REPEAT.word, REPEAT.word)
-                .options(FIND_REPEAT_WORDS)
-                .callApi()
-                .then()
-                .specification(successResponse(Matchers.allOf(Matchers.containsString(ERROR_REPEAT_WORD.toString()))));
+        List<List<YandexSpellerAnswer>> answers = YandexSpellerAPI.getYandexSpellerAnswers(
+                YandexSpellerAPI.with()
+                        .text(REPEAT.word, REPEAT.word)
+                        .options(FIND_REPEAT_WORDS)
+                        .callApi());
+        assertThat("Expected number of answers is wrong.", answers.get(0).size(), not(0));
+        assertThat("Expected error \"Repeat words.\"", "\"code\":" + answers.get(0).get(0).getCode(),
+                equalTo(ERROR_REPEAT_WORD.toString()));
+        assertThat("Expected word is wrong", answers.get(0).get(0).getWord(), equalTo(REPEAT.word));
+        assertThat("Expected result is wrong", answers.get(0).get(0).getS(), equalTo(REPEAT.s));
     }
 
     @Test
     public void wordWithDigits() {
+        List<List<YandexSpellerAnswer>> answers = YandexSpellerAPI.getYandexSpellerAnswers(
         YandexSpellerAPI.with()
                 .language(EN)
                 .text(WITH_DIGITS.word)
-                .callApi()
-                .then()
-                .specification(successResponse(Matchers.allOf(
-                        Matchers.stringContainsInOrder(Arrays.asList(WITH_DIGITS.word, WITH_DIGITS.s)),
-                        Matchers.containsString(ERROR_UNKNOWN_WORD.toString()))));
+                .callApi());
+        assertThat("Expected number of answers is wrong.", answers.get(0).size(), not(0));
+        assertThat("Expected error \"Words are not in the dictionary.\"", "\"code\":" + answers.get(0).get(0).getCode(),
+                equalTo(ERROR_UNKNOWN_WORD.toString()));
+        assertThat("Expected word is wrong", answers.get(0).get(0).getWord(), equalTo(WITH_DIGITS.word));
+        assertThat("Expected result is wrong", answers.get(0).get(0).getS().get(0), equalTo(WITH_DIGITS.s));
     }
 
     @Test

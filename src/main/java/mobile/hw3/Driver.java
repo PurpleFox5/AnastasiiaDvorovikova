@@ -1,6 +1,8 @@
 package mobile.hw3;
 
 import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.remote.MobileCapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -92,6 +94,15 @@ public class Driver {
             throw new Exception("Unclear type of mobile app");
         }
         // Init driver for local Appium server with capabilities have been set
-        driverSingle = new AppiumDriver(new URL(DRIVER), capabilities);
+        switch (TEST_PLATFORM) {
+            case "Android":
+                driverSingle = new AndroidDriver(new URL(DRIVER), capabilities);
+                break;
+            case "iOS":
+                driverSingle = new IOSDriver(new URL(DRIVER), capabilities);
+                break;
+            default:
+                driverSingle = new AppiumDriver(new URL(DRIVER), capabilities);
+        }
     }
 }

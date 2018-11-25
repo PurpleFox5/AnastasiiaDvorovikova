@@ -1,32 +1,18 @@
 package mobile.hw3;
 
+import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.ios.IOSDriver;
 import org.openqa.selenium.By;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
 
 import static mobile.hw3.Driver.getDriver;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
-public class SimpleNativeTests {
+public class SimpleNativeTests extends Hooks {
 
-    @BeforeClass
-    public void setNative() throws Exception {
-        getDriver(PropertyFile.NATIVE_PROPERTY);
-        System.out.println("Driver is prepared");
-    }
-
-    @AfterClass
-    public void tearDown() throws Exception {
-        getDriver().close();
-        System.out.println("Driver is closed");
-    }
-
-    @Test(description = "Click on button 'Add contact', check elements, check virtual keyboard")
+    @Test(description = "Click on button 'Add contact', check elements, check virtual keyboard",
+            groups = "native")
     public void simplestTest() throws Exception {
         String app_package_name = "com.example.android.contactmanager:id/";
 
@@ -43,14 +29,12 @@ public class SimpleNativeTests {
         assertTrue(getDriver().findElement(By.id(app_package_name + "contactEmailEditText")).isDisplayed());
 
         //Check virtual keyboard appears
-        Process process = Runtime.getRuntime().exec("adb shell dumpsys input_method | grep mInputShown");
-        try (BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()))) {
-            String output = reader.readLine();
-            assertTrue(Boolean.parseBoolean(output.substring(output.lastIndexOf("=") + 1)));
+        if (getDriver() instanceof AndroidDriver) {
+            assertTrue(((AndroidDriver) getDriver()).isKeyboardShown());
+        } else if (getDriver() instanceof IOSDriver) {
+            assertTrue(((IOSDriver) getDriver()).isKeyboardShown());
         }
-
         System.out.println("Simplest Native test done");
     }
 
 }
-

@@ -13,21 +13,9 @@ import static mobile.hw3.Driver.*;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
-public class SimpleWebTests {
+public class SimpleWebTests extends Hooks{
 
-    @BeforeClass
-    public void setNative() throws Exception {
-        getDriver(PropertyFile.WEB_PROPERTY);
-        System.out.println("Driver is prepared");
-    }
-
-    @AfterClass
-    public void tearDown() throws Exception {
-        getDriver().close();
-        System.out.println("Driver is closed");
-    }
-
-    @Test(description = "Open site, check title, elements, open another page")
+    @Test(description = "Open site, check title, elements, open another page", groups = "web")
     public void webTest() throws Exception {
         getDriver().get(SUT);
         getDriverWait().until(ExpectedConditions.urlToBe(SUT + "/"));
